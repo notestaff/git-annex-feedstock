@@ -38,7 +38,7 @@ requirements:
     - git >=2
     - rsync
     - ncurses 5.9
-    - libmagic
+    - libmagic >=5.30
     - libgsasl
     - gmp 6.1.*
     - libffi
@@ -59,3 +59,6 @@ about:
 extra:
   recipe-maintainers:
     - notestaff
+    - yarikoptic
+    - joeyh
+
