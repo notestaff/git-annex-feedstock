@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win or osx]
 
 requirements:
@@ -61,4 +61,3 @@ extra:
     - notestaff
     - yarikoptic
     - joeyh
-
