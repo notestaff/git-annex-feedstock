@@ -1,6 +1,6 @@
 {% set name = "git-annex" %}
-{% set version = "6.20180626" %}
-{% set sha256 = "f8b80e861c033605a62dffc0a97ffae5df506eaa238bcaae31a20e486eea036f" %}
+{% set version = "6.20180807" %}
+{% set sha256 = "3a68f5d3a5c0ee13669b048dbd2ada5cb27e9b85780c295c0d1f54547c8078f2" %}
 
 package:
   name: {{ name|lower }}
@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 2
+  number: 0
   skip: True  # [win or osx]
 
 requirements:
