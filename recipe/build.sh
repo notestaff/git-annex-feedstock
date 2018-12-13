@@ -13,7 +13,7 @@ export LIBRARY_PATH=${LIBRARY_PATH}:${PREFIX}/lib
 export STACK_ROOT=${PACKAGE_HOME}/stackroot
 mkdir -p ${STACK_ROOT}
 
-STACK_OPTS="--local-bin-path ${PREFIX}/bin --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --stack-root ${STACK_ROOT} "
+STACK_OPTS="--local-bin-path ${PREFIX}/bin --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --stack-root ${STACK_ROOT} --resolver lts-11.22"
 
 mkdir -p ${PREFIX}/bin
 
