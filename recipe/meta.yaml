@@ -1,6 +1,6 @@
 {% set name = "git-annex" %}
-{% set version = "7.20181105" %}
-{% set sha256 = "83df8691964aea5c59e901d639d18fe96e2073b93d5cff1adc9931fddc4a044a" %}
+{% set version = "7.20181211" %}
+{% set sha256 = "ddcca8f4df22e82f95dfaf6e1a6585936f988337358cfa7ebe5a6847be88fb17" %}
 
 package:
   name: {{ name|lower }}
@@ -17,7 +17,8 @@ build:
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - pkg-config
     - perl
     - git >=2
