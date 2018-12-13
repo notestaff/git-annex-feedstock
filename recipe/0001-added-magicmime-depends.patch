@@ -1,0 +1,25 @@
+From d126812e5a91c508abe956ac319a7442e5c4395d Mon Sep 17 00:00:00 2001
+From: Ilya Shlyakhter <ilya_shl@alum.mit.edu>
+Date: Thu, 13 Dec 2018 18:26:15 -0500
+Subject: [PATCH] added magicmime depends
+
+---
+ stack.yaml | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/stack.yaml b/stack.yaml
+index d7b8758..7abba7e 100644
+--- a/stack.yaml
++++ b/stack.yaml
+@@ -18,6 +18,8 @@ extra-deps:
+ - bloomfilter-2.0.1.0
+ - tasty-rerun-1.1.13
+ - torrent-10000.1.1
++- magic-1.1
++- sandi-0.4.3
+ explicit-setup-deps:
+   git-annex: true
+ resolver: lts-12.19
+-- 
+2.18.0
+
