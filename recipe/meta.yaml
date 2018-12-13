@@ -17,8 +17,7 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - toolchain
     - pkg-config
     - perl
     - git >=2
