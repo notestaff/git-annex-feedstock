@@ -1,0 +1,25 @@
+From f37788fa56e81fc43f94b04ca224acd375d4e1fe Mon Sep 17 00:00:00 2001
+From: Ilya Shlyakhter <ilya_shl@alum.mit.edu>
+Date: Fri, 14 Dec 2018 16:46:14 -0500
+Subject: [PATCH] add magic and sandi
+
+---
+ stack.yaml | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/stack.yaml b/stack.yaml
+index d7b8758..7abba7e 100644
+--- a/stack.yaml
++++ b/stack.yaml
+@@ -18,6 +18,8 @@ extra-deps:
+ - bloomfilter-2.0.1.0
+ - tasty-rerun-1.1.13
+ - torrent-10000.1.1
++- magic-1.1
++- sandi-0.4.3
+ explicit-setup-deps:
+   git-annex: true
+ resolver: lts-12.19
+-- 
+2.18.0
+
