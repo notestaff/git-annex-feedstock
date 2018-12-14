@@ -11,7 +11,7 @@ source:
   url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
-    - 0001-added-magicmime-depends.patch
+    - 0001-added-matic-sandi-and-gmp.patch
 
 build:
   number: 0
