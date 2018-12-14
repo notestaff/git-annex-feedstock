@@ -19,34 +19,33 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - toolchain
     - pkg-config
     - perl
     - git >=2
     - stack
-    - ncurses 5.9
+    - ncurses
     - libmagic >=5.30
     - libgsasl
     - gmp
     - rsync
     - libffi
     - gnutls
-    - libxml2 2.9.*
-    - sqlite 3.20.*
+    - libxml2
+    - sqlite
     - chrpath  # [linux]
   run:
     - perl
     - git >=2
     - rsync
-    - ncurses 5.9
+    - ncurses
     - libmagic >=5.30
     - libgsasl
     - gmp
     - libffi
     - gnutls
-    - libxml2 2.9.*
-    - sqlite 3.20.*
+    - libxml2
+    - sqlite
 
 about:
   home: https://git-annex.branchable.com
