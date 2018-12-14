@@ -1,0 +1,28 @@
+From 5541714d4585c8f82c82600b5ca5bd6a0f8a3b7a Mon Sep 17 00:00:00 2001
+From: Ilya Shlyakhter <ilya_shl@alum.mit.edu>
+Date: Thu, 13 Dec 2018 20:36:45 -0500
+Subject: [PATCH] added magic sand and gmp
+
+---
+ stack.yaml | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/stack.yaml b/stack.yaml
+index d7b8758..c75a297 100644
+--- a/stack.yaml
++++ b/stack.yaml
+@@ -18,6 +18,11 @@ extra-deps:
+ - bloomfilter-2.0.1.0
+ - tasty-rerun-1.1.13
+ - torrent-10000.1.1
++- magic-1.1
++- sandi-0.4.3
++nix:
++  enable: true
++  packages: [gmp]
+ explicit-setup-deps:
+   git-annex: true
+ resolver: lts-12.19
+-- 
+2.18.0
+
