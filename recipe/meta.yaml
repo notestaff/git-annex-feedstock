@@ -19,7 +19,8 @@ build:
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - pkg-config
     - perl
     - git >=2
@@ -27,7 +28,7 @@ requirements:
     - ncurses 5.9
     - libmagic >=5.30
     - libgsasl
-    - gmp 6.1.*
+    - gmp
     - rsync
     - libffi
     - gnutls
@@ -41,7 +42,7 @@ requirements:
     - ncurses 5.9
     - libmagic >=5.30
     - libgsasl
-    - gmp 6.1.*
+    - gmp
     - libffi
     - gnutls
     - libxml2 2.9.*
