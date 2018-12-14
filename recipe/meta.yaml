@@ -18,6 +18,22 @@ build:
   skip: True  # [win or osx]
 
 requirements:
+  host:
+    - toolchain
+    - pkg-config
+    - perl
+    - git >=2
+    - stack
+    - ncurses
+    - libmagic >=5.30
+    - libgsasl
+    - gmp
+    - rsync
+    - libffi
+    - gnutls
+    - libxml2
+    - sqlite
+    - chrpath  # [linux]
   build:
     - toolchain
     - pkg-config

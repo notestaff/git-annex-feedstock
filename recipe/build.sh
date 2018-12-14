@@ -9,6 +9,8 @@ mkdir -p ${BINARY_HOME}
 mkdir -p ${PACKAGE_HOME}
 
 export LIBRARY_PATH=${LIBRARY_PATH}:${PREFIX}/lib
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${PREFIX}/lib
+export LD_LIBRARY64_PATH=${LD_LIBRARY64_PATH}:${PREFIX}/lib64:${PREFIX}/lib
 
 export STACK_ROOT=${PACKAGE_HOME}/stackroot
 mkdir -p ${STACK_ROOT}
@@ -17,8 +19,20 @@ STACK_OPTS="--local-bin-path ${PREFIX}/bin --extra-include-dirs ${PREFIX}/includ
 
 mkdir -p ${PREFIX}/bin
 
+echo "--------------- ENVIRONMENT IS -------------------------------"
+env
+echo "--------------- ENVIRONMENT END -------------------------------"
+echo "lib dir is"
+ls -alt ${PREFIX}/lib/libgmp*
+echo "--------------- CALLING STACK SETUP -------------------------------"
+
 stack ${STACK_OPTS} setup
+
+echo "--------------- CALLING STACK INSTALL -------------------------------"
+
 stack ${STACK_OPTS} install --ghc-options "-optl-L${PREFIX}/lib -optl-Wl,-rpath,${PREFIX}/lib"
+
+echo "--------------- RETURNED FROM STACK INSTALL -------------------------------"
 
 ln -s ${PREFIX}/bin/git-annex ${PREFIX}/bin/git-annex-shell
 rm -rf ${PACKAGE_HOME}
