@@ -9,11 +9,13 @@ mkdir -p ${BINARY_HOME}
 mkdir -p ${PACKAGE_HOME}
 
 export LIBRARY_PATH=${LIBRARY_PATH}:${PREFIX}/lib
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${PREFIX}/lib
+export LD_LIBRARY64_PATH=${LD_LIBRARY64_PATH}:${PREFIX}/lib64:${PREFIX}/lib
 
 export STACK_ROOT=${PACKAGE_HOME}/stackroot
 mkdir -p ${STACK_ROOT}
 
-STACK_OPTS="--local-bin-path ${PREFIX}/bin --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --stack-root ${STACK_ROOT} "
+STACK_OPTS="--local-bin-path ${PREFIX}/bin --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --stack-root ${STACK_ROOT} --resolver lts-11.22"
 
 mkdir -p ${PREFIX}/bin
 

@@ -1,6 +1,6 @@
 {% set name = "git-annex" %}
-{% set version = "7.20181105" %}
-{% set sha256 = "83df8691964aea5c59e901d639d18fe96e2073b93d5cff1adc9931fddc4a044a" %}
+{% set version = "7.20181211" %}
+{% set sha256 = "ddcca8f4df22e82f95dfaf6e1a6585936f988337358cfa7ebe5a6847be88fb17" %}
 
 package:
   name: {{ name|lower }}
@@ -10,6 +10,8 @@ source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    - 0001-add-magic-and-sandi.patch
 
 build:
   number: 0
@@ -22,28 +24,28 @@ requirements:
     - perl
     - git >=2
     - stack
-    - ncurses 5.9
+    - ncurses
     - libmagic >=5.30
     - libgsasl
-    - gmp 6.1.*
+    - gmp
     - rsync
     - libffi
     - gnutls
-    - libxml2 2.9.*
-    - sqlite 3.20.*
+    - libxml2
+    - sqlite
     - chrpath  # [linux]
   run:
     - perl
     - git >=2
     - rsync
-    - ncurses 5.9
+    - ncurses
     - libmagic >=5.30
     - libgsasl
-    - gmp 6.1.*
+    - gmp
     - libffi
     - gnutls
-    - libxml2 2.9.*
-    - sqlite 3.20.*
+    - libxml2
+    - sqlite
 
 about:
   home: https://git-annex.branchable.com
