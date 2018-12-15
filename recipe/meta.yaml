@@ -14,7 +14,7 @@ source:
     - 0001-add-magic-and-sandi.patch
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win or osx]
 
 requirements:
@@ -35,7 +35,6 @@ requirements:
     - sqlite
     - chrpath  # [linux]
   run:
-    - perl
     - git >=2
     - rsync
     - ncurses
@@ -46,6 +45,8 @@ requirements:
     - gnutls
     - libxml2
     - sqlite
+  test:
+    - gpg
 
 about:
   home: https://git-annex.branchable.com
