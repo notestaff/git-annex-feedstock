@@ -19,11 +19,13 @@ build:
 
 requirements:
   build:
-    - toolchain
-    - pkg-config
-    - perl
-    - git >=2
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - stack
+    - perl
+    - pkg-config
+  host:
+    - git >=2
     - ncurses
     - libmagic >=5.30
     - libgsasl
