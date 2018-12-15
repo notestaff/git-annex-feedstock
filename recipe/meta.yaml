@@ -50,7 +50,7 @@ requirements:
 
 test:
   requires:
-    - gpg
+    - gnupg
 
 about:
   home: https://git-annex.branchable.com
