@@ -45,7 +45,9 @@ requirements:
     - gnutls
     - libxml2
     - sqlite
-  test:
+
+test:
+  requires:
     - gpg
 
 about:
