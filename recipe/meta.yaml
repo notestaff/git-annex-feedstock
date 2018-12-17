@@ -14,16 +14,18 @@ source:
     - 0001-add-magic-and-sandi.patch
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win or osx]
 
 requirements:
   build:
-    - toolchain
-    - pkg-config
-    - perl
-    - git >=2
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - stack
+    - perl
+    - pkg-config
+  host:
+    - git >=2
     - ncurses
     - libmagic >=5.30
     - libgsasl
@@ -35,7 +37,6 @@ requirements:
     - sqlite
     - chrpath  # [linux]
   run:
-    - perl
     - git >=2
     - rsync
     - ncurses
@@ -46,6 +47,10 @@ requirements:
     - gnutls
     - libxml2
     - sqlite
+
+test:
+  requires:
+    - gnupg
 
 about:
   home: https://git-annex.branchable.com
