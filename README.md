@@ -18,7 +18,7 @@ Current build status
 ====================
 
 [![Linux](https://img.shields.io/circleci/project/github/conda-forge/git-annex-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/git-annex-feedstock)
-![OSX disabled](https://img.shields.io/badge/OSX-disabled-lightgrey.svg)
+[![OSX](https://img.shields.io/travis/conda-forge/git-annex-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/git-annex-feedstock)
 ![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
 
 Current release info
