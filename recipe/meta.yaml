@@ -14,7 +14,7 @@ source:
     - 0001-add-magic-and-sandi.patch
 
 build:
-  number: 0
+  number: 1000
   skip: True  # [win or osx]
 
 requirements:
@@ -24,6 +24,7 @@ requirements:
     - stack
     - perl
     - pkg-config
+    - gmp
   host:
     - git >=2
     - ncurses
