@@ -24,7 +24,6 @@ requirements:
     - stack
     - perl
     - pkg-config
-    - gmp
   host:
     - git >=2
     - ncurses
