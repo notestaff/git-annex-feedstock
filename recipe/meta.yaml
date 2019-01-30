@@ -1,6 +1,6 @@
 {% set name = "git-annex" %}
-{% set version = "7.20190122" %}
-{% set sha256 = "65f64aa8b0ab7115bc143ed3471f5b3ee880d6d988d4c403f4aaca3ab52eaa7c" %}
+{% set version = "7.20190129" %}
+{% set sha256 = "0159d060819399e0943655e9bc5dfe434007d349a86cb89320bdb6b3ab0f513f" %}
 
 package:
   name: {{ name|lower }}
@@ -14,7 +14,7 @@ source:
     - 0001-add-magic-and-sandi.patch
 
 build:
-  number: 1000
+  number: 0
   skip: True  # [win or osx]
 
 requirements:
