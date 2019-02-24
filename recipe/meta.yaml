@@ -16,12 +16,9 @@ build:
   skip: True  # [win or osx]
   binary_relocation: False
 
-requirements:
-  build:
-    - wget
-
 test:
   requires:
+    - git
     - gnupg
 
 about:
