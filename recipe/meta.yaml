@@ -19,7 +19,7 @@ build:
 test:
   requires:
     - git
-    - gnupg
+
 
 about:
   home: https://git-annex.branchable.com
