@@ -20,9 +20,9 @@ requirements:
   build:
     - wget
 
-#test:
-#  requires:
-#    - gnupg
+test:
+  requires:
+    - gnupg
 
 about:
   home: https://git-annex.branchable.com
