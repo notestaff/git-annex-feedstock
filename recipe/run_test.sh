@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -e -o pipefail -x
+set -eu -o pipefail -x
 
-git annex version
+git annex --verbose --debug version
 git annex test

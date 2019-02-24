@@ -1,26 +1,35 @@
 #!/bin/sh
 
-set -e -o pipefail -x
+set -eu -o pipefail -x
 
 BINARY_HOME=${PREFIX}/bin
-PACKAGE_HOME=${PREFIX}/share/${PKG_NAME}-${PKG_VERSION}-${PKG_BUILDNUM}
+export PACKAGE_HOME=${PREFIX}/share/${PKG_NAME}-${PKG_VERSION}-${PKG_BUILDNUM}
 
-mkdir -p ${BINARY_HOME}
-mkdir -p ${PACKAGE_HOME}
+mkdir -p ${BINARY_HOME} ${PACKAGE_HOME}
 
-export LIBRARY_PATH=${LIBRARY_PATH}:${PREFIX}/lib
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${PREFIX}/lib
-export LD_LIBRARY64_PATH=${LD_LIBRARY64_PATH}:${PREFIX}/lib64:${PREFIX}/lib
+mv git-annex-${PKG_VERSION}.tar.gz_ git-annex-${PKG_VERSION}.tar.gz
+tar xvfz git-annex-${PKG_VERSION}.tar.gz --directory ${PACKAGE_HOME}
 
-export STACK_ROOT=${PACKAGE_HOME}/stackroot
-mkdir -p ${STACK_ROOT}
+cp ${PACKAGE_HOME}/git-annex.linux/LICENSE .
 
-STACK_OPTS="--local-bin-path ${PREFIX}/bin --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --stack-root ${STACK_ROOT} --resolver lts-11.22"
+pushd ${PACKAGE_HOME}/git-annex.linux
+patch < ${RECIPE_DIR}/0001-fix-locpath.patch
+popd
 
-mkdir -p ${PREFIX}/bin
+export GIT_ANNEX_LOCPATH=${PACKAGE_HOME}/locpath
+mkdir -p ${GIT_ANNEX_LOCPATH}
+${PACKAGE_HOME}/git-annex.linux/runshell ls
 
-stack ${STACK_OPTS} setup
-stack ${STACK_OPTS} install --ghc-options "-optl-L${PREFIX}/lib -optl-Wl,-rpath,${PREFIX}/lib" --flag git-annex:magicmime
+# FAKE_HOME=${PACKAGE_HOME}/home
+# mkdir -p ${PACKAGE_HOME}/home
+# HOME=${FAKE_HOME} ${PACKAGE_HOME}/git-annex.linux/runshell ls
+# NEW_LOC_DIR=$(ls -d ${FAKE_HOME}/.cache/git-annex/locales/*)
+# mv ${NEW_LOC_DIR} ${PACKAGE_HOME}/locales
 
-ln -s ${PREFIX}/bin/git-annex ${PREFIX}/bin/git-annex-shell
-rm -rf ${PACKAGE_HOME}
+echo "#!/bin/sh" > ${BINARY_HOME}/git-annex
+echo "" >> ${BINARY_HOME}/git-annex
+echo "set -eux -o pipefail" >> ${BINARY_HOME}/git-annex
+echo "export LOCPATH=${GIT_ANNEX_LOCPATH}" >> ${BINARY_HOME}/git-annex
+#echo "export GIT_ANNEX_PACKAGE_INSTALL=1" >> ${BINARY_HOME}/git-annex
+echo "${PACKAGE_HOME}/git-annex.linux/runshell git-annex \"\$@\"" >> ${BINARY_HOME}/git-annex
+chmod u+x ${BINARY_HOME}/git-annex

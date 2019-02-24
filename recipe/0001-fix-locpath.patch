@@ -1,0 +1,40 @@
+From cd3e25fdb8a3fb07339fb8fd5d4d148fd4c0cfb6 Mon Sep 17 00:00:00 2001
+From: Ilya Shlyakhter <ilya_shl@alum.mit.edu>
+Date: Sun, 24 Feb 2019 15:46:24 -0500
+Subject: [PATCH] fix locpath
+
+---
+ runshell | 15 ++-------------
+ 1 file changed, 2 insertions(+), 13 deletions(-)
+
+diff --git a/runshell b/runshell
+index 32849e3..b7a84a5 100755
+--- a/runshell
++++ b/runshell
+@@ -128,21 +128,10 @@ unset LD_PRELOAD
+ ORIG_LOCPATH="$LOCPATH"
+ export ORIG_LOCPATH
+ if [ -z "${LOCPATH+set}" ] && [ -z "$GIT_ANNEX_PACKAGE_INSTALL" ]; then
+-	LOCPATH="$HOME/.cache/git-annex/locales/$(echo "$base" | tr / _ )"
++	LOCPATH="${GIT_ANNEX_LOCPATH}"
+ 	export LOCPATH
+ 	
+-	# Clean up locale caches when their standalone bundle no longer exists.
+-	for localecache in $HOME/.cache/git-annex/locales/*; do
+-		cachebase=$(cat "$localecache/base" 2>/dev/null || true)
+-		if [ ! -d "$cachebase" ] || ! cmp "$localecache/buildid" "$cachebase/buildid" >/dev/null 2>&1 ; then
+-			rm -rf "$localecache" 2>&1 || true
+-		fi
+-	done
+-	
+-	# If the locale cache for this bundle is out of date, refresh it.
+-	if [ -e "$LOCPATH/buildid" ] && ! cmp "$LOCPATH/buildid" "$base/buildid" >/dev/null 2>&1 ; then
+-		rm -rf "$LOCPATH"
+-	fi
++	rm -rf "$LOCPATH"
+ 	if ! mkdir -p "$LOCPATH"; then
+ 		echo "Unable to write to $LOCPATH; can't continue!" >&2
+ 		exit 1
+-- 
+2.18.0
+
