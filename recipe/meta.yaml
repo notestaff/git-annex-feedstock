@@ -1,62 +1,34 @@
 {% set name = "git-annex" %}
-{% set version = "7.20181211" %}
-{% set sha256 = "ddcca8f4df22e82f95dfaf6e1a6585936f988337358cfa7ebe5a6847be88fb17" %}
-
+{% set version = "7.20190219" %}
+{% set sha256 = "e91a9caeb202d8f27958d22d040ebef9bd5af3b003302873f02bcb1a48778118" %}
+{% set size = "65427380" %}
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
+  fn: {{ name }}-{{ version }}.tar.gz_
+  url: https://downloads.kitenet.net/.git/annex/objects/g3/Q0/SHA256E-s{{ size }}--{{ sha256 }}.tar.gz/SHA256E-s{{ size }}--{{ sha256 }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    - 0001-add-magic-and-sandi.patch
 
 build:
-  number: 1
+  number: 0
   skip: True  # [win or osx]
+  binary_relocation: False
 
 requirements:
   build:
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - stack
-    - perl
-    - pkg-config
-  host:
-    - git >=2
-    - ncurses
-    - libmagic >=5.30
-    - libgsasl
-    - gmp
-    - rsync
-    - libffi
-    - gnutls
-    - libxml2
-    - sqlite
-    - chrpath  # [linux]
-  run:
-    - git >=2
-    - rsync
-    - ncurses
-    - libmagic >=5.30
-    - libgsasl
-    - gmp
-    - libffi
-    - gnutls
-    - libxml2
-    - sqlite
+    - wget
 
-test:
-  requires:
-    - gnupg
+#test:
+#  requires:
+#    - gnupg
 
 about:
   home: https://git-annex.branchable.com
   license: GPLv3
   license_family: GPL
-  license_file: COPYRIGHT
+  license_file: LICENSE
   summary: 'Version control large files with git without storing them'
   description: |
     git-annex lets you use git to track large, distributed files without checking them into git
