@@ -26,9 +26,9 @@ ${PACKAGE_HOME}/git-annex.linux/runshell ls
 # NEW_LOC_DIR=$(ls -d ${FAKE_HOME}/.cache/git-annex/locales/*)
 # mv ${NEW_LOC_DIR} ${PACKAGE_HOME}/locales
 
-echo "#!/bin/sh" > ${BINARY_HOME}/git-annex
+echo "#!/bin/bash" > ${BINARY_HOME}/git-annex
 echo "" >> ${BINARY_HOME}/git-annex
-echo "set -eux -o pipefail" >> ${BINARY_HOME}/git-annex
+echo "set -eu -o pipefail" >> ${BINARY_HOME}/git-annex
 echo "export LOCPATH=${GIT_ANNEX_LOCPATH}" >> ${BINARY_HOME}/git-annex
 #echo "export GIT_ANNEX_PACKAGE_INSTALL=1" >> ${BINARY_HOME}/git-annex
 echo "${PACKAGE_HOME}/git-annex.linux/runshell git-annex \"\$@\"" >> ${BINARY_HOME}/git-annex
