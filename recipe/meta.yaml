@@ -12,14 +12,21 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win or osx]
   binary_relocation: False
 
+requirements:
+  build:
+    - {{ compiler('c') }}
+  host:
+    - git >=2
+  run:
+    - git >=2
+  
 test:
   requires:
-    - git
-
+    - git >=2
 
 about:
   home: https://git-annex.branchable.com
