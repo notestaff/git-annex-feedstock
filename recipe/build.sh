@@ -1,35 +1,64 @@
-#!/bin/sh
+#!/bin/bash
 
-set -eu -o pipefail -x
+set -e -o pipefail -x
 
-BINARY_HOME=${PREFIX}/bin
-export PACKAGE_HOME=${PREFIX}/share/${PKG_NAME}-${PKG_VERSION}-${PKG_BUILDNUM}
+export LIBRARY_PATH="${PREFIX}/lib:${LIBRARY_PTH}"
+export LD_LIBRARY_PATH="${PREFIX}/lib:${LD_LIBRARY_PATH}"
+export LDFLAGS=" -L${PREFIX}/lib ${LDFLAGS} "
+export CPPFLAGS="-I${PREFIX}/include ${CPPFLAGS} "
 
-mkdir -p ${BINARY_HOME} ${PACKAGE_HOME}
+export GMP_INCLUDE_DIRS=$PREFIX/include
+export GMP_LIB_DIRS=$PREFIX/lib
 
-mv git-annex-${PKG_VERSION}.tar.gz_ git-annex-${PKG_VERSION}.tar.gz
-tar xvfz git-annex-${PKG_VERSION}.tar.gz --directory ${PACKAGE_HOME}
+echo "#!/bin/bash" > $CC-shim
+echo "set -e -o pipefail -x " >> $CC-shim
+echo "$CC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $CC-shim
+chmod u+x $CC-shim
+export CC=$CC-shim
 
-cp ${PACKAGE_HOME}/git-annex.linux/LICENSE .
+echo "#!/bin/bash" > $CXX-shim
+echo "set -e -o pipefail -x " >> $CXX-shim
+echo "$CXX -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $CXX-shim
+chmod u+x $CXX-shim
+export CXX=$CXX-shim
 
-pushd ${PACKAGE_HOME}/git-annex.linux
-patch < ${RECIPE_DIR}/0001-fix-locpath.patch
-popd
+echo "#!/bin/bash" > $GCC-shim
+echo "set -e -o pipefail -x " >> $GCC-shim
+echo "$GCC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GCC-shim
+chmod u+x $GCC-shim
+export GCC=$GCC-shim
 
-export GIT_ANNEX_LOCPATH=${PACKAGE_HOME}/locpath
-mkdir -p ${GIT_ANNEX_LOCPATH}
-${PACKAGE_HOME}/git-annex.linux/runshell ls
+echo "#!/bin/bash" > $GXX-shim
+echo "set -e -o pipefail -x " >> $GXX-shim
+echo "$GXX -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GXX-shim
+chmod u+x $GXX-shim
+export GXX=$GXX-shim
 
-# FAKE_HOME=${PACKAGE_HOME}/home
-# mkdir -p ${PACKAGE_HOME}/home
-# HOME=${FAKE_HOME} ${PACKAGE_HOME}/git-annex.linux/runshell ls
-# NEW_LOC_DIR=$(ls -d ${FAKE_HOME}/.cache/git-annex/locales/*)
-# mv ${NEW_LOC_DIR} ${PACKAGE_HOME}/locales
+echo "#!/bin/bash" > $LD-shim
+echo "set -e -o pipefail -x " >> $LD-shim
+echo "$LD -L$PREFIX/lib \"\$@\"" >> $LD-shim
+chmod u+x $LD-shim
+export LD=$LD-shim
 
-echo "#!/bin/bash" > ${BINARY_HOME}/git-annex
-echo "" >> ${BINARY_HOME}/git-annex
-echo "set -eu -o pipefail" >> ${BINARY_HOME}/git-annex
-echo "export LOCPATH=${GIT_ANNEX_LOCPATH}" >> ${BINARY_HOME}/git-annex
-#echo "export GIT_ANNEX_PACKAGE_INSTALL=1" >> ${BINARY_HOME}/git-annex
-echo "${PACKAGE_HOME}/git-annex.linux/runshell git-annex \"\$@\"" >> ${BINARY_HOME}/git-annex
-chmod u+x ${BINARY_HOME}/git-annex
+echo "#!/bin/bash" > ${LD}.gold
+echo "set -e -o pipefail -x " >> ${LD}.gold
+echo "$LD_GOLD -L$PREFIX/lib \"\$@\"" >> ${LD}.gold
+chmod u+x ${LD}.gold
+export LD_GOLD=${LD}.gold
+
+rm ${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libpthread.so
+ln -s /lib64/libpthread.so.0 ${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libpthread.so
+
+mkdir -p ~/.stack
+echo "extra-include-dirs:"  > ~/.stack/config.yaml
+echo "- ${PREFIX}/include" >> ~/.stack/config.yaml
+echo "extra-lib-dirs:"     >> ~/.stack/config.yaml
+echo "- ${PREFIX}/lib"     >> ~/.stack/config.yaml
+echo "ghc-options:"        >> ~/.stack/config.yaml
+echo "  \"\$everything\": -optc-I${PREFIX}/include -optl-L${PREFIX}/lib" >> ~/.stack/config.yaml
+echo "apply-ghc-options: everything" >> ~/.stack/config.yaml
+
+stack setup
+stack update
+stack install --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin
+ln -s ${PREFIX}/bin/git-annex ${PREFIX}/bin/git-annex-shell

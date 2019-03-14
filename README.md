@@ -5,15 +5,14 @@
 About git-annex
 ===============
 
-Home: https://git-annex.branchable.com
+Home: http://git-annex.branchable.com
 
-Package license: GPLv3
+Package license: GPL-3
 
 Feedstock license: BSD 3-Clause
 
-Summary: Version control large files with git without storing them
+Summary: A tool for managing large files with git
 
-git-annex lets you use git to track large, distributed files without checking them into git
 
 
 Current build status
