@@ -1,44 +1,65 @@
 {% set name = "git-annex" %}
 {% set version = "7.20190219" %}
-{% set sha256 = "e91a9caeb202d8f27958d22d040ebef9bd5af3b003302873f02bcb1a48778118" %}
-{% set size = "65427380" %}
+{% set sha256 = "82f3c10fe96141b1564bfc894a36c0e53bdf6843f09782c380d1a616bf96c104" %}
+
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz_
-  url: https://downloads.kitenet.net/.git/annex/objects/g3/Q0/SHA256E-s{{ size }}--{{ sha256 }}.tar.gz/SHA256E-s{{ size }}--{{ sha256 }}.tar.gz
+  url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
-  number: 2
-  skip: True  # [win or osx]
-  binary_relocation: False
+  number: 9
+  skip: True  #  [osx]
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
   host:
-    - git >=2
+    - stack >=1.3.2
+    - perl
+    - gmp
+    - zlib
+    - ncurses
+    - git
+    - libmagic
+    - libgsasl
+    - chrpath
+    - libxml2
+    - gnutls
+    - sqlite
+    - rsync
+    - coreutils
+    - binutils
+
   run:
-    - git >=2
-  
+    - gmp
+    - perl
+    - zlib
+    - openssl
+    - ncurses
+    - git
+    - libmagic
+    - libgsasl
+    - chrpath
+    - libxml2
+    - gnutls
+    - sqlite
+    - libgcc-ng
+    - libstdcxx-ng
+    - rsync
+    - coreutils
+    - binutils
+
 test:
-  requires:
-    - git >=2
+  commands:
+    - git-annex version
+    - git-annex test
 
 about:
-  home: https://git-annex.branchable.com
-  license: GPLv3
-  license_family: GPL
-  license_file: LICENSE
-  summary: 'Version control large files with git without storing them'
-  description: |
-    git-annex lets you use git to track large, distributed files without checking them into git
-
-extra:
-  recipe-maintainers:
-    - notestaff
-    - yarikoptic
-    - joeyh
+  home: http://git-annex.branchable.com
+  license: GPL-3
+  summary: A tool for managing large files with git

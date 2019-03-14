@@ -1,35 +1,80 @@
-#!/bin/sh
+#!/bin/bash
 
-set -eu -o pipefail -x
+set -e -o pipefail -x
 
-BINARY_HOME=${PREFIX}/bin
-export PACKAGE_HOME=${PREFIX}/share/${PKG_NAME}-${PKG_VERSION}-${PKG_BUILDNUM}
+export LIBRARY_PATH="${PREFIX}/lib"
+export LD_LIBRARY_PATH="${PREFIX}/lib"
+export LDFLAGS=" -L/lib64 -L${PREFIX}/lib"
+export CPPFLAGS="-I${PREFIX}/include"
 
-mkdir -p ${BINARY_HOME} ${PACKAGE_HOME}
+export GMP_INCLUDE_DIRS=$PREFIX/include
+export GMP_LIB_DIRS=$PREFIX/lib
 
-mv git-annex-${PKG_VERSION}.tar.gz_ git-annex-${PKG_VERSION}.tar.gz
-tar xvfz git-annex-${PKG_VERSION}.tar.gz --directory ${PACKAGE_HOME}
+echo "#!/bin/bash" > $CC-mine
+echo "set -e -o pipefail -x " >> $CC-mine
+echo "$CC -I$PREFIX/include  -L/lib64 -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $CC-mine
+chmod u+x $CC-mine
+export CC=$CC-mine
 
-cp ${PACKAGE_HOME}/git-annex.linux/LICENSE .
+echo "#!/bin/bash" > $CXX-mine
+echo "set -e -o pipefail -x " >> $CXX-mine
+echo "$CXX -I$PREFIX/include  -L/lib64 -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $CXX-mine
+chmod u+x $CXX-mine
+export CXX=$CXX-mine
 
-pushd ${PACKAGE_HOME}/git-annex.linux
-patch < ${RECIPE_DIR}/0001-fix-locpath.patch
-popd
+echo "#!/bin/bash" > $GCC-mine
+echo "set -e -o pipefail -x " >> $GCC-mine
+echo "$GCC -I$PREFIX/include  -L/lib64 -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GCC-mine
+chmod u+x $GCC-mine
+export GCC=$GCC-mine
 
-export GIT_ANNEX_LOCPATH=${PACKAGE_HOME}/locpath
-mkdir -p ${GIT_ANNEX_LOCPATH}
-${PACKAGE_HOME}/git-annex.linux/runshell ls
+echo "#!/bin/bash" > $GXX-mine
+echo "set -e -o pipefail -x " >> $GXX-mine
+echo "$GXX -I$PREFIX/include  -L/lib64 -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GXX-mine
+chmod u+x $GXX-mine
+export GXX=$GXX-mine
 
-# FAKE_HOME=${PACKAGE_HOME}/home
-# mkdir -p ${PACKAGE_HOME}/home
-# HOME=${FAKE_HOME} ${PACKAGE_HOME}/git-annex.linux/runshell ls
-# NEW_LOC_DIR=$(ls -d ${FAKE_HOME}/.cache/git-annex/locales/*)
-# mv ${NEW_LOC_DIR} ${PACKAGE_HOME}/locales
+echo "#!/bin/bash" > $LD-mine
+echo "set -e -o pipefail -x " >> $LD-mine
+echo "$LD  -L/lib64 -L$PREFIX/lib  \"\$@\"" >> $LD-mine
+chmod u+x $LD-mine
+export LD=$LD-mine
 
-echo "#!/bin/bash" > ${BINARY_HOME}/git-annex
-echo "" >> ${BINARY_HOME}/git-annex
-echo "set -eu -o pipefail" >> ${BINARY_HOME}/git-annex
-echo "export LOCPATH=${GIT_ANNEX_LOCPATH}" >> ${BINARY_HOME}/git-annex
-#echo "export GIT_ANNEX_PACKAGE_INSTALL=1" >> ${BINARY_HOME}/git-annex
-echo "${PACKAGE_HOME}/git-annex.linux/runshell git-annex \"\$@\"" >> ${BINARY_HOME}/git-annex
-chmod u+x ${BINARY_HOME}/git-annex
+echo "#!/bin/bash" > ${LD}.gold
+echo "set -e -o pipefail -x " >> ${LD}.gold
+echo "$LD_GOLD  -L/lib64 -L$PREFIX/lib  \"\$@\"" >> ${LD}.gold
+chmod u+x ${LD}.gold
+export LD_GOLD=${LD}.gold
+
+rm ${BUILD_PREFIX}/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/libpthread.so
+ln -s /lib64/libpthread.so.0 ${BUILD_PREFIX}/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/libpthread.so
+
+#git clone git://git-annex.branchable.com/ git-annex
+#pushd git-annex
+#cp $RECIPE_DIR/stack-lts-9.9.yaml stack.yaml
+mkdir -p ~/.stack
+echo "extra-include-dirs:"  > ~/.stack/config.yaml
+echo "- ${PREFIX}/include" >> ~/.stack/config.yaml
+echo "extra-lib-dirs:" >> ~/.stack/config.yaml
+echo "- ${PREFIX}/lib" >> ~/.stack/config.yaml
+#echo "compiler: ghc-8.2.2" >> ~/.stack/config.yaml
+echo "ghc-options:" >> ~/.stack/config.yaml
+echo "  \"\$everything\": -optc-I${PREFIX}/include -optl-L${PREFIX}/lib" >> ~/.stack/config.yaml
+echo "apply-ghc-options: everything" >> ~/.stack/config.yaml
+
+cp $RECIPE_DIR/stack.yaml .
+stack --resolver=lts-11.22 setup
+stack --resolver=lts-11.22 update
+stack --resolver=lts-11.22 install --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib "  --local-bin-path ${PREFIX}/bin
+ln -s ${PREFIX}/bin/git-annex ${PREFIX}/bin/git-annex-shell
+which git-annex
+git-annex version
+#git-annex test
+#stack runghc git-annex version
+#stack runghc git-annex test
+#mv ${PREFIX}/bin/RNAlien ${PREFIX}/bin/RNAlien-bin
+#echo -e "#!/bin/bash\nexport SYSTEM_CERTIFICATE_PATH=/usr/local/ssl/cacert.pem\n${PREFIX}/bin/RNAlien-bin \"\$@\"\n" > ${PREFIX}/bin/RNAlien
+#chmod 755 ${PREFIX}/bin/RNAlien
+#cleanup
+#rm -r .stack-work
+
