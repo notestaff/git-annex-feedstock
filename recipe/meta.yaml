@@ -9,6 +9,9 @@ package:
 source:
   url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    - 0001-add-wcwidth-to-extra-deps.patch
+    - 0002-change-resolver-to-lts-11.22.patch
 
 build:
   number: 9
@@ -18,7 +21,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - stack >=1.3.2
+    - stack >=1.9.3
     - perl
     - coreutils
     - binutils
