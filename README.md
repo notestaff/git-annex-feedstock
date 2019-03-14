@@ -19,8 +19,8 @@ Current build status
 ====================
 
 [![Linux](https://img.shields.io/circleci/project/github/conda-forge/git-annex-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/git-annex-feedstock)
-[![Windows](https://img.shields.io/appveyor/ci/conda-forge/git-annex-feedstock/master.svg?label=Windows)](https://ci.appveyor.com/project/conda-forge/git-annex-feedstock/branch/master)
 ![OSX disabled](https://img.shields.io/badge/OSX-disabled-lightgrey.svg)
+![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
 
 Current release info
 ====================
@@ -114,4 +114,7 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
+* [@joeyh](https://github.com/joeyh/)
+* [@notestaff](https://github.com/notestaff/)
+* [@yarikoptic](https://github.com/yarikoptic/)
 
