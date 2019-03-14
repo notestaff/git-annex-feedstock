@@ -12,7 +12,7 @@ source:
 
 build:
   number: 9
-  skip: True  #  [osx]
+  skip: True  # [not linux]
 
 requirements:
   build:
@@ -63,3 +63,9 @@ about:
   home: http://git-annex.branchable.com
   license: GPL-3
   summary: A tool for managing large files with git
+
+extra:
+  recipe-maintainers:
+    - notestaff
+    - yarikoptic
+    - joeyh
