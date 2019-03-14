@@ -18,41 +18,23 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-  host:
     - stack >=1.3.2
     - perl
+    - coreutils
+    - binutils
+    - chrpath
+  host:
     - gmp
     - zlib
     - ncurses
-    - git
     - libmagic
     - libgsasl
-    - chrpath
     - libxml2
     - gnutls
     - sqlite
-    - rsync
-    - coreutils
-    - binutils
-
   run:
-    - gmp
-    - perl
-    - zlib
-    - openssl
-    - ncurses
-    - git
-    - libmagic
-    - libgsasl
-    - chrpath
-    - libxml2
-    - gnutls
-    - sqlite
-    - libgcc-ng
-    - libstdcxx-ng
     - rsync
-    - coreutils
-    - binutils
+    - git
 
 test:
   commands:
