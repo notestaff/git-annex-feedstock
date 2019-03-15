@@ -1,0 +1,40 @@
+From 157597360df92994e2fbd0f9b70c1f09584de2d9 Mon Sep 17 00:00:00 2001
+From: Ilya Shlyakhter <ilya_shl@alum.mit.edu>
+Date: Fri, 15 Mar 2019 18:35:03 +0000
+Subject: [PATCH] add magicmime; add wcwidth; resolver to lts-11.22
+
+---
+ stack.yaml | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/stack.yaml b/stack.yaml
+index 5653705..30b7484 100644
+--- a/stack.yaml
++++ b/stack.yaml
+@@ -7,7 +7,7 @@ flags:
+     webdav: true
+     torrentparser: true
+     webapp: true
+-    magicmime: false
++    magicmime: true
+     dbus: false
+     debuglocks: false
+     benchmark: false
+@@ -15,6 +15,8 @@ flags:
+ packages:
+ - '.'
+ extra-deps:
++- wcwidth-0.0.2
++- magic-1.1
+ - IfElse-0.85
+ - aws-0.20
+ - bloomfilter-2.0.1.0
+@@ -24,4 +26,4 @@ extra-deps:
+ - sandi-0.5
+ explicit-setup-deps:
+   git-annex: true
+-resolver: lts-13.6
++resolver: lts-11.22
+-- 
+2.21.0
+
