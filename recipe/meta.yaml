@@ -10,11 +10,10 @@ source:
   url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
   patches:
-    - 0001-add-wcwidth-to-extra-deps.patch
-    - 0002-change-resolver-to-lts-11.22.patch
+    - 0001-add-magicmime-add-wcwidth-resolver-to-lts-11.22.patch
 
 build:
-  number: 10
+  number: 11
   skip: True  # [not linux]
 
 requirements:
