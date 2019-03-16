@@ -1,14 +1,26 @@
-From 157597360df92994e2fbd0f9b70c1f09584de2d9 Mon Sep 17 00:00:00 2001
+From d95c70a6916c70afdfdc195db2b12073a246fb34 Mon Sep 17 00:00:00 2001
 From: Ilya Shlyakhter <ilya_shl@alum.mit.edu>
 Date: Fri, 15 Mar 2019 18:35:03 +0000
 Subject: [PATCH] add magicmime; add wcwidth; resolver to lts-11.22
 
 ---
- stack.yaml | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ custres.yaml | 4 ++++
+ stack.yaml   | 7 +++++--
+ 2 files changed, 9 insertions(+), 2 deletions(-)
+ create mode 100644 custres.yaml
 
+diff --git a/custres.yaml b/custres.yaml
+new file mode 100644
+index 0000000..09ed622
+--- /dev/null
++++ b/custres.yaml
+@@ -0,0 +1,4 @@
++resolver: lts-13.6 # Inherits GHC version and package set
++compiler: ghc-8.4.2 # Overwrites GHC version in the resolver, optional
++
++name: my-snapshot # User-friendly name
 diff --git a/stack.yaml b/stack.yaml
-index 5653705..30b7484 100644
+index 5653705..850ec20 100644
 --- a/stack.yaml
 +++ b/stack.yaml
 @@ -7,7 +7,7 @@ flags:
@@ -29,12 +41,13 @@ index 5653705..30b7484 100644
  - IfElse-0.85
  - aws-0.20
  - bloomfilter-2.0.1.0
-@@ -24,4 +26,4 @@ extra-deps:
+@@ -24,4 +26,5 @@ extra-deps:
  - sandi-0.5
  explicit-setup-deps:
    git-annex: true
 -resolver: lts-13.6
-+resolver: lts-11.22
++resolver: custres.yaml
++
 -- 
-2.21.0
+2.20.1
 

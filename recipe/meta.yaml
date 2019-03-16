@@ -13,7 +13,7 @@ source:
     - 0001-add-magicmime-add-wcwidth-resolver-to-lts-11.22.patch
 
 build:
-  number: 11
+  number: 12
   skip: True  # [not linux]
 
 requirements:
