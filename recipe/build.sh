@@ -22,17 +22,28 @@ echo "$CXX -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $CXX-shim
 chmod u+x $CXX-shim
 export CXX=$CXX-shim
 
-echo "#!/bin/bash" > $GCC-shim
-echo "set -e -o pipefail -x " >> $GCC-shim
-echo "$GCC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GCC-shim
-chmod u+x $GCC-shim
-export GCC=$GCC-shim
 
-echo "#!/bin/bash" > $GXX-shim
-echo "set -e -o pipefail -x " >> $GXX-shim
-echo "$GXX -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GXX-shim
-chmod u+x $GXX-shim
-export GXX=$GXX-shim
+if [ -z ${GCC+x} ];
+then
+    echo "GCC is unset"
+else
+    echo "#!/bin/bash" > $GCC-shim
+    echo "set -e -o pipefail -x " >> $GCC-shim
+    echo "$GCC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GCC-shim
+    chmod u+x $GCC-shim
+    export GCC=$GCC-shim
+fi
+
+if [ -z ${GXX+x} ];
+then
+    echo "GXX is unset"
+else
+    echo "#!/bin/bash" > $GXX-shim
+    echo "set -e -o pipefail -x " >> $GXX-shim
+    echo "$GXX -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GXX-shim
+    chmod u+x $GXX-shim
+    export GXX=$GXX-shim
+fi
 
 echo "#!/bin/bash" > $LD-shim
 echo "set -e -o pipefail -x " >> $LD-shim
