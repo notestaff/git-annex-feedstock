@@ -57,8 +57,12 @@ echo "$LD_GOLD -L$PREFIX/lib \"\$@\"" >> ${LD}.gold
 chmod u+x ${LD}.gold
 export LD_GOLD=${LD}.gold
 
-rm ${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libpthread.so
-ln -s /lib64/libpthread.so.0 ${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libpthread.so
+LIBPTHREAD_SO="${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libpthread.so"
+if [ -f "${LIBPTHREAD_SO}" ];
+then
+    rm ${LIBPTHREAD_SO}
+    ln -s /lib64/libpthread.so.0 ${LIBPTHREAD_SO}
+fi
 
 mkdir -p ~/.stack
 echo "extra-include-dirs:"  > ~/.stack/config.yaml
