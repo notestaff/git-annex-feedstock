@@ -14,7 +14,7 @@ source:
 
 build:
   number: 13
-  skip: True  # [not win]
+  skip: True  # [win]
 
 requirements:
   build:
