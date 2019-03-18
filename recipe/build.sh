@@ -73,7 +73,7 @@ echo "ghc-options:"        >> ~/.stack/config.yaml
 echo "  \"\$everything\": -optc-I${PREFIX}/include -optl-L${PREFIX}/lib" >> ~/.stack/config.yaml
 echo "apply-ghc-options: everything" >> ~/.stack/config.yaml
 
-stack setup
-stack update
-stack install --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin
+stack --verbose setup
+stack --verbose update
+stack --verbose install --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin
 ln -s ${PREFIX}/bin/git-annex ${PREFIX}/bin/git-annex-shell
