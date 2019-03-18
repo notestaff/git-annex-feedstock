@@ -24,7 +24,7 @@ requirements:
     - perl
     - coreutils
     - binutils
-    - chrpath
+    - chrpath  # [linux]
   host:
     - gmp
     - zlib
