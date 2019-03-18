@@ -16,23 +16,11 @@ echo "$CC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $CC-shim
 chmod u+x $CC-shim
 export CC=$CC-shim
 
-echo "#!/bin/bash" > $CXX-shim
-echo "set -e -o pipefail -x " >> $CXX-shim
-echo "$CXX -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $CXX-shim
-chmod u+x $CXX-shim
-export CXX=$CXX-shim
-
 echo "#!/bin/bash" > $GCC-shim
 echo "set -e -o pipefail -x " >> $GCC-shim
 echo "$GCC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GCC-shim
 chmod u+x $GCC-shim
 export GCC=$GCC-shim
-
-echo "#!/bin/bash" > $GXX-shim
-echo "set -e -o pipefail -x " >> $GXX-shim
-echo "$GXX -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GXX-shim
-chmod u+x $GXX-shim
-export GXX=$GXX-shim
 
 echo "#!/bin/bash" > $LD-shim
 echo "set -e -o pipefail -x " >> $LD-shim

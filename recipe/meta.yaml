@@ -19,20 +19,16 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
     - stack >=1.9.3
     - perl
     - coreutils
     - binutils
-    - chrpath
+    - pkg-config
   host:
     - gmp
     - zlib
     - ncurses
     - libmagic
-    - libgsasl
-    - libxml2
-    - gnutls
     - sqlite
     - dbus
   run:
