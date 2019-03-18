@@ -1,15 +1,25 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '10.9'
 c_compiler:
-- vs2008
+- clang
+c_compiler_version:
+- '4'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2008
+- clangxx
+cxx_compiler_version:
+- '4'
 gmp:
 - '6'
 libxml2:
 - '2.9'
+macos_machine:
+- x86_64-apple-darwin13.4.0
+macos_min_version:
+- '10.9'
 ncurses:
 - '6.1'
 perl:
@@ -29,8 +39,5 @@ pin_run_as_build:
     max_pin: x.x
 sqlite:
 - '3'
-zip_keys:
-- - c_compiler
-  - cxx_compiler
 zlib:
 - '1.2'
