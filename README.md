@@ -18,8 +18,8 @@ Summary: A tool for managing large files with git
 Current build status
 ====================
 
-[![Linux](https://img.shields.io/circleci/project/github/conda-forge/git-annex-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/git-annex-feedstock)
-[![OSX](https://img.shields.io/travis/conda-forge/git-annex-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/git-annex-feedstock)
+[![OSX](https://img.shields.io/travis/conda-forge/is-try-enabling-osx-01-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/is-try-enabling-osx-01-feedstock)
+![Linux disabled](https://img.shields.io/badge/linux-disabled-lightgrey.svg)
 ![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
 
 Current release info
