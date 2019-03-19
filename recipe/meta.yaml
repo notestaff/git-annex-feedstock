@@ -1,29 +1,49 @@
 {% set name = "git-annex" %}
 {% set version = "7.20190219" %}
 {% set sha256 = "82f3c10fe96141b1564bfc894a36c0e53bdf6843f09782c380d1a616bf96c104" %}
+{% set ghc_src_version = "8.6.3" %}
+{% set ghc_src_sha256 = "9f9e37b7971935d88ba80426c36af14b1e0b3ec1d9c860f44a4391771bc07f23" %}
+{% set ghc_bootstrap_version = "8.4.2" %}
+{% set ghc_bootstrap_sha256 = "28c31489ed9a83af4400685ec8bc72a6d43d08958d75b2dc35d29a894a5c9d93" %}
+
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
-  patches:
-    - 0001-use-ghc-8.4.2-enable-magicmime-and-dbus-add-wcwidth-.patch
+  - url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
+    sha256: {{ sha256 }}
+    folder: git_annex_main
+
+  - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-centos67-linux.tar.xz
+    sha256: {{ ghc_bootstrap_sha256 }}
+    folder: ghc_bootstrap
+
+  - url: https://downloads.haskell.org/~ghc/{{ ghc_src_version }}/ghc-{{ ghc_src_version }}-src.tar.xz
+    sha256: {{ ghc_src_sha256 }}
+    folder: ghc_src
 
 build:
-  number: 13
+  number: 14
   skip: True  # [not linux]
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - stack >=1.9.3
     - perl
     - coreutils
     - binutils
     - pkg-config
+    - xz
+    - automake
+    - autoconf
+    - libtool
+    - bzip2
+    - ncurses
+    - libffi
   host:
     - gmp
     - zlib
