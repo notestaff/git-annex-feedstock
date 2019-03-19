@@ -36,6 +36,8 @@ requirements:
     - git
 
 test:
+  requires:
+    - gnupg
   commands:
     - git-annex version
     - git-annex test
