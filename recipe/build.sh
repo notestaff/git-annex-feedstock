@@ -2,6 +2,10 @@
 
 set -e -o pipefail -x
 
+###################################################################################################################
+# Set up the C/C++ compilation environment
+###################################################################################################################
+
 mkdir -p $PREFIX/bin $BUILD_PREFIX/bin $PREFIX/lib $BUILD_PREFIX/lib $PREFIX/share $BUILD_PREFIX/share
 export LIBRARY_PATH="${PREFIX}/lib:${LIBRARY_PTH}"
 export LD_LIBRARY_PATH="${PREFIX}/lib:${LD_LIBRARY_PATH}"
@@ -10,6 +14,11 @@ export CPPFLAGS="-I${PREFIX}/include ${CPPFLAGS} "
 
 export GMP_INCLUDE_DIRS=$PREFIX/include
 export GMP_LIB_DIRS=$PREFIX/lib
+
+# Ugly hack 1: ensure that the C/C++ compiler and linker are always called with certain flags.
+# We install shim scripts that call the original compiler/linker after prepending the flags to the command line.
+# My efforts to do this by standard methods, via configure flags, have been unsuccessful: there was always some
+# case where the flags would not get passed down to the compiler/linker.
 
 echo "#!/bin/bash" > $CC-shim
 echo "set -e -o pipefail -x " >> $CC-shim
@@ -35,10 +44,19 @@ echo "$LD_GOLD -L$PREFIX/lib \"\$@\"" >> ${LD}.gold
 chmod u+x ${LD}.gold
 export LD_GOLD=${LD}.gold
 
-rm ${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libpthread.so
-ln -s /lib64/libpthread.so.0 ${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libpthread.so
+# Ugly hack 2: replace libpthread with the system one.
+# We want to link against /lib64/libpthread .  But some compilations stubbornly try to link
+# against ${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libpthread.so which currently forwards to
+# /lib/libpthread which is 32-bit, when we need 64-bit.  The hack below seems to make things
+# work, but of course a better solution is needed.
 
-#################################
+LIBPTHREAD_SO="${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libpthread.so"
+rm ${LIBPTHREAD_SO}
+ln -s ${LIBPTHREAD_SO}
+
+###################################################################################################################
+# Set up bootstrap GHC
+###################################################################################################################
 
 export GHC_BOOTSTRAP_PREFIX=${SRC_DIR}/ghc_bootstrap_pfx
 mkdir -p $GHC_BOOTSTRAP_PREFIX/bin
@@ -48,8 +66,12 @@ pushd ${SRC_DIR}/ghc_bootstrap
 ./configure --prefix=${GHC_BOOTSTRAP_PREFIX}
 make install
 ghc-pkg recache
-
 popd
+
+###################################################################################################################
+# Build recent GHC from source, using bootstrap GHC
+###################################################################################################################
+
 pushd ${SRC_DIR}/ghc_src
 
 touch mk/build.mk
@@ -69,7 +91,9 @@ make install
 ghc-pkg recache
 popd
 
-#################################
+###################################################################################################################
+# Finally, build git-annex using the recent GHC
+###################################################################################################################
 
 pushd ${SRC_DIR}/git_annex_main
 
