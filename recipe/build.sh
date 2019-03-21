@@ -59,14 +59,10 @@ echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-incl
 echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-libraries=$PREFIX/lib" >> mk/build.mk
 echo "STRIP_CMD = $STRIP" >> build.mk
 
-echo ENV IS
-env
-echo END OF ENV
-
 ./boot
 ./configure --prefix=${BUILD_PREFIX}  --with-gmp-includes=$PREFIX/include --with-gmp-libraries=$PREFIX/libraries
 set +e
-make -j16
+make -j${CPU_COUNT}
 set -e
 make
 make install
