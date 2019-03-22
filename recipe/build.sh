@@ -2,13 +2,22 @@
 
 set -e -o pipefail -x
 
-export LIBRARY_PATH="${PREFIX}/lib:${LIBRARY_PTH}"
+#######################################################################################################
+# Set up build environment
+#######################################################################################################
+
+mkdir -p $PREFIX/bin $BUILD_PREFIX/bin $PREFIX/lib $BUILD_PREFIX/lib $PREFIX/share $BUILD_PREFIX/share
+export LIBRARY_PATH="${PREFIX}/lib:${LIBRARY_PATH}"
 export LD_LIBRARY_PATH="${PREFIX}/lib:${LD_LIBRARY_PATH}"
 export LDFLAGS=" -L${PREFIX}/lib ${LDFLAGS} "
 export CPPFLAGS="-I${PREFIX}/include ${CPPFLAGS} "
 
 export GMP_INCLUDE_DIRS=$PREFIX/include
 export GMP_LIB_DIRS=$PREFIX/lib
+
+#
+# Install shim scripts to ensure that certain flags are always passed to the compiler/linker
+#
 
 echo "#!/bin/bash" > $CC-shim
 echo "set -e -o pipefail -x " >> $CC-shim
@@ -46,8 +55,9 @@ echo "$LD_GOLD -L$PREFIX/lib \"\$@\"" >> ${LD}.gold
 chmod u+x ${LD}.gold
 export LD_GOLD=${LD}.gold
 
-rm ${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libpthread.so
-ln -s /lib64/libpthread.so.0 ${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libpthread.so
+HOST_LIBPTHREAD="${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libpthread.so"
+rm ${HOST_LIBPTHREAD}
+ln -s /lib64/libpthread.so.0 ${HOST_LIBPTHREAD}
 
 mkdir -p ~/.stack
 echo "extra-include-dirs:"  > ~/.stack/config.yaml

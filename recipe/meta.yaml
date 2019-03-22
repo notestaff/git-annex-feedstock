@@ -13,7 +13,7 @@ source:
     - 0001-add-magicmime-add-wcwidth-resolver-to-lts-11.22.patch
 
 build:
-  number: 12
+  number: 14
   skip: True  # [not linux]
 
 requirements:
@@ -24,15 +24,12 @@ requirements:
     - perl
     - coreutils
     - binutils
-    - chrpath
   host:
     - gmp
     - zlib
     - ncurses
     - libmagic
-    - libgsasl
     - libxml2
-    - gnutls
     - sqlite
   run:
     - rsync
