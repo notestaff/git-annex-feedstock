@@ -1,0 +1,6 @@
+resolver: lts-13.6
+compiler: ghc-8.4.2
+name: git-annex-custom-snapshot
+packages:
+- wcwidth-0.0.2
+- magic-1.1
