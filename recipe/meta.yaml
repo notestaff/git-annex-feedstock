@@ -1,6 +1,6 @@
 {% set name = "git-annex" %}
-{% set version = "7.20190219" %}
-{% set sha256 = "82f3c10fe96141b1564bfc894a36c0e53bdf6843f09782c380d1a616bf96c104" %}
+{% set version = "7.20190322" %}
+{% set sha256 = "ddda8ce4c23d76ab77610a0116ab68a9adb2e9a7087db99577e6b7743f1a9ffa" %}
 
 package:
   name: {{ name }}
@@ -9,11 +9,9 @@ package:
 source:
   url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
-  patches:
-    - 0001-add-magicmime-add-wcwidth-resolver-to-lts-11.22.patch
 
 build:
-  number: 12
+  number: 0
   skip: True  # [not linux]
 
 requirements:
@@ -24,16 +22,14 @@ requirements:
     - perl
     - coreutils
     - binutils
-    - chrpath
   host:
     - gmp
     - zlib
     - ncurses
     - libmagic
-    - libgsasl
     - libxml2
-    - gnutls
     - sqlite
+    - dbus
   run:
     - rsync
     - git
