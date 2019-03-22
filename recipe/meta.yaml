@@ -1,6 +1,6 @@
 {% set name = "git-annex" %}
-{% set version = "7.20190219" %}
-{% set sha256 = "82f3c10fe96141b1564bfc894a36c0e53bdf6843f09782c380d1a616bf96c104" %}
+{% set version = "7.20190322" %}
+{% set sha256 = "ddda8ce4c23d76ab77610a0116ab68a9adb2e9a7087db99577e6b7743f1a9ffa" %}
 
 package:
   name: {{ name }}
@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 14
+  number: 0
   skip: True  # [not linux]
 
 requirements:
@@ -29,6 +29,7 @@ requirements:
     - libmagic
     - libxml2
     - sqlite
+    - dbus
   run:
     - rsync
     - git
