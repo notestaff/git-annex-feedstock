@@ -59,14 +59,21 @@ HOST_LIBPTHREAD="${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libpthread.so"
 rm ${HOST_LIBPTHREAD}
 ln -s /lib64/libpthread.so.0 ${HOST_LIBPTHREAD}
 
-mkdir -p ~/.stack
-echo "extra-include-dirs:"  > ~/.stack/config.yaml
-echo "- ${PREFIX}/include" >> ~/.stack/config.yaml
-echo "extra-lib-dirs:"     >> ~/.stack/config.yaml
-echo "- ${PREFIX}/lib"     >> ~/.stack/config.yaml
-echo "ghc-options:"        >> ~/.stack/config.yaml
-echo "  \"\$everything\": -optc-I${PREFIX}/include -optl-L${PREFIX}/lib" >> ~/.stack/config.yaml
-echo "apply-ghc-options: everything" >> ~/.stack/config.yaml
+#######################################################################################################
+# Build git-annex
+#######################################################################################################
+
+export STACK_ROOT=${SRC_DIR}/stack_root
+mkdir -p $STACK_ROOT
+( 
+    echo "extra-include-dirs:"
+    echo "- ${PREFIX}/include"
+    echo "extra-lib-dirs:"
+    echo "- ${PREFIX}/lib"
+    echo "ghc-options:"
+    echo "  \"\$everything\": -optc-I${PREFIX}/include -optl-L${PREFIX}/lib"
+    echo "apply-ghc-options: everything"
+) > "${STACK_ROOT}/config.yaml"
 
 stack setup
 stack update
