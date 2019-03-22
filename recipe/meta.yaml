@@ -25,7 +25,7 @@ source:
     folder: ghc_src
 
 build:
-  number: 14
+  number: 15
   skip: True  # [not linux]
 
 requirements:
