@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   skip: True  # [not linux]
 
 requirements:
@@ -31,13 +31,18 @@ requirements:
     - sqlite
     - dbus
   run:
+    - libmagic
     - rsync
     - git
 
 test:
+  requires:
+    - datalad
+    - nose
   commands:
     - git-annex version
     - git-annex test
+    - datalad test
 
 about:
   home: http://git-annex.branchable.com
