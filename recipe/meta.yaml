@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1
+  number: 2
   skip: True  # [not linux]
 
 requirements:
@@ -31,9 +31,10 @@ requirements:
     - sqlite
     - dbus
   run:
+    - git
     - libmagic
     - rsync
-    - git
+    - curl
 
 test:
   requires:
