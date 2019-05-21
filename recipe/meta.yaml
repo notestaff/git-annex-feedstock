@@ -20,8 +20,8 @@ requirements:
     - {{ compiler('cxx') }}
     - stack >=1.9.3
     - perl
-    - coreutils
-    - binutils
+    - coreutils  # [not win]
+    - binutils  # [not win]
   host:
     - gmp
     - zlib
