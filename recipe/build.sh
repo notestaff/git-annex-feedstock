@@ -109,7 +109,9 @@ mkdir -p $STACK_ROOT
 ) > "${STACK_ROOT}/config.yaml"
 
 cp ${RECIPE_DIR}/git_annex_custom_snapshot.yaml .
-stack setup --resolver git_annex_custom_snapshot.yaml
-stack update --resolver git_annex_custom_snapshot.yaml
-stack install --resolver git_annex_custom_snapshot.yaml --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin --flag git-annex:magicmime --flag git-annex:dbus
+stack --verbose setup --resolver git_annex_custom_snapshot.yaml
+stack --verbose update --resolver git_annex_custom_snapshot.yaml
+stack --verbose install --resolver git_annex_custom_snapshot.yaml --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin --flag git-annex:magicmime --flag git-annex:dbus
 ln -s ${PREFIX}/bin/git-annex ${PREFIX}/bin/git-annex-shell
+echo "SUCCESSFULLY BUILT git-annex in ${PREFIX}"
+
