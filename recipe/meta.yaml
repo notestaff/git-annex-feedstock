@@ -23,16 +23,16 @@ requirements:
     - coreutils  # [not win]
     - binutils  # [not win]
   host:
-    - gmp
+    - gmp  # [not win]
     - zlib
-    - ncurses
-    - libmagic
+    - ncurses  # [not win]
+    - libmagic  # [not win]
     - libxml2
     - sqlite
-    - dbus
+    - dbus  # [not win]
   run:
     - git
-    - libmagic
+    - libmagic  # [not win]
     - rsync
     - curl
 

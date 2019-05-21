@@ -1,1 +1,1 @@
-stack install -v git-annex
+stack --verbose install git-annex
