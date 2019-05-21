@@ -33,17 +33,17 @@ requirements:
   run:
     - git
     - libmagic  # [not win]
-    - rsync
+    - rsync  # [not win]
     - curl
 
 test:
   requires:
-    - datalad
-    - nose
+    - datalad  # [not win]
+    - nose  # [not win]
   commands:
     - git-annex version
     - git-annex test
-    - datalad test
+    - datalad test  # [not win]
 
 about:
   home: http://git-annex.branchable.com
