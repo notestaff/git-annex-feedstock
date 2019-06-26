@@ -1,6 +1,6 @@
 {% set name = "git-annex" %}
-{% set version = "7.20190219" %}
-{% set sha256 = "82f3c10fe96141b1564bfc894a36c0e53bdf6843f09782c380d1a616bf96c104" %}
+{% set version = "7.20190626" %}
+{% set sha256 = "9b0e8b0ae2f29d4f731f76f25cb57d4cc7d45f8f2a22d836c70c100b85e45ef6" %}
 {% set ghc_src_version = "8.6.3" %}
 {% set ghc_src_sha256 = "9f9e37b7971935d88ba80426c36af14b1e0b3ec1d9c860f44a4391771bc07f23" %}
 {% set ghc_bootstrap_version = "8.4.2" %}
@@ -25,7 +25,7 @@ source:
     folder: ghc_src
 
 build:
-  number: 15
+  number: 1
   skip: True  # [not linux]
 
 requirements:
