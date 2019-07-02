@@ -11,8 +11,8 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
-  skip: True  # [not linux]
+  number: 1
+  skip: True  # [not osx]
 
 requirements:
   build:
@@ -37,13 +37,9 @@ requirements:
     - curl
 
 test:
-  requires:
-    - datalad
-    - nose
   commands:
     - git-annex version
     - git-annex test
-    - datalad test
 
 about:
   home: http://git-annex.branchable.com
