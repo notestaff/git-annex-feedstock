@@ -1,0 +1,56 @@
+From 9698b78c195198b98ae462fb177c1fe05f75dceb Mon Sep 17 00:00:00 2001
+From: Ilya Shlyakhter <ilya_shl@alum.mit.edu>
+Date: Mon, 18 Mar 2019 17:32:46 +0000
+Subject: [PATCH] use ghc-8.4.2, enable magicmime and dbus, add wcwidth to
+ extra-deps
+
+---
+ custres.yaml |  4 ++++
+ stack.yaml   | 10 +++++++---
+ 2 files changed, 11 insertions(+), 3 deletions(-)
+ create mode 100644 custres.yaml
+
+diff --git a/custres.yaml b/custres.yaml
+new file mode 100644
+index 0000000..e28e00c
+--- /dev/null
++++ b/custres.yaml
+@@ -0,0 +1,4 @@
++resolver: lts-13.6 # Inherits GHC version and package set
++compiler: ghc-8.4.2 # Overwrites GHC version in the resolver, optional
++
++name: my-snapshot # User-friendly name
+diff --git a/stack.yaml b/stack.yaml
+index 5653705..0d39c0e 100644
+--- a/stack.yaml
++++ b/stack.yaml
+@@ -7,14 +7,17 @@ flags:
+     webdav: true
+     torrentparser: true
+     webapp: true
+-    magicmime: false
+-    dbus: false
++    magicmime: true
++    dbus: true
+     debuglocks: false
+     benchmark: false
+     networkbsd: false
+ packages:
+ - '.'
+ extra-deps:
++- wcwidth-0.0.2
++- magic-1.1
++- fdo-notify-0.3.1
+ - IfElse-0.85
+ - aws-0.20
+ - bloomfilter-2.0.1.0
+@@ -24,4 +27,5 @@ extra-deps:
+ - sandi-0.5
+ explicit-setup-deps:
+   git-annex: true
+-resolver: lts-13.6
++resolver: custres.yaml
++
+-- 
+2.21.0
+
