@@ -1,6 +1,6 @@
 {% set name = "git-annex" %}
-{% set version = "7.20190626" %}
-{% set sha256 = "9b0e8b0ae2f29d4f731f76f25cb57d4cc7d45f8f2a22d836c70c100b85e45ef6" %}
+{% set version = "7.20190708" %}
+{% set sha256 = "32d27f64c5d26a3c0c1f3fd445791f1e105b216cb7a4940ee915ddccf53045a3" %}
 
 package:
   name: {{ name }}
@@ -47,8 +47,15 @@ test:
 
 about:
   home: http://git-annex.branchable.com
-  license: GPL-3
+  license: AGPL-3.0
+  license_family: AGPL
+  license_file: LICENSE
   summary: A tool for managing large files with git
+  description: |
+    git-annex allows managing files with git, without checking the file contents into git.
+    It is useful when dealing with files larger than git can currently easily handle.
+    The contents can be stored locally or in various remote repositories; git-annex tracks
+    which contents is stored where.
 
 extra:
   recipe-maintainers:
