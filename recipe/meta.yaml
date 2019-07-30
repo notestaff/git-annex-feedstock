@@ -1,14 +1,28 @@
 {% set name = "git-annex" %}
-{% set version = "7.20190708" %}
-{% set sha256 = "32d27f64c5d26a3c0c1f3fd445791f1e105b216cb7a4940ee915ddccf53045a3" %}
+{% set version = "7.20190730" %}
+{% set sha256 = "4feafd05ccd815da2d9cc8da1e0e05ae5b8b0b8af96bcf6b7b2fe1539b50be9a" %}
+{% set ghc_src_version = "8.6.3" %}
+{% set ghc_src_sha256 = "9f9e37b7971935d88ba80426c36af14b1e0b3ec1d9c860f44a4391771bc07f23" %}
+{% set ghc_bootstrap_version = "8.4.2" %}
+{% set ghc_bootstrap_sha256 = "28c31489ed9a83af4400685ec8bc72a6d43d08958d75b2dc35d29a894a5c9d93" %}
+
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  - url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
+    sha256: {{ sha256 }}
+    folder: git_annex_main
+
+  - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-centos67-linux.tar.xz
+    sha256: {{ ghc_bootstrap_sha256 }}
+    folder: ghc_bootstrap
+
+  - url: https://downloads.haskell.org/~ghc/{{ ghc_src_version }}/ghc-{{ ghc_src_version }}-src.tar.xz
+    sha256: {{ ghc_src_sha256 }}
+    folder: ghc_src
 
 build:
   number: 0
@@ -22,40 +36,34 @@ requirements:
     - perl
     - coreutils
     - binutils
+    - pkg-config
+    - xz
+    - automake
+    - autoconf
+    - libtool
+    - bzip2
+    - ncurses
+    - libffi
   host:
     - gmp
     - zlib
     - ncurses
     - libmagic
-    - libxml2
     - sqlite
     - dbus
   run:
-    - git
-    - libmagic
     - rsync
-    - curl
+    - git
 
 test:
-  requires:
-    - datalad
-    - nose
   commands:
     - git-annex version
     - git-annex test
-    - datalad test
 
 about:
   home: http://git-annex.branchable.com
-  license: AGPL-3.0
-  license_family: AGPL
-  license_file: LICENSE
+  license: GPL-3
   summary: A tool for managing large files with git
-  description: |
-    git-annex allows managing files with git, without checking the file contents into git.
-    It is useful when dealing with files larger than git can currently easily handle.
-    The contents can be stored locally or in various remote repositories; git-annex tracks
-    which contents is stored where.
 
 extra:
   recipe-maintainers:
