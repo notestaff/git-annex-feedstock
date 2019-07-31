@@ -75,7 +75,6 @@ mkdir -p $STACK_ROOT
     echo "apply-ghc-options: everything"
 ) > "${STACK_ROOT}/config.yaml"
 
-cp ${RECIPE_DIR}/git_annex_custom_snapshot.yaml .
 stack setup
 stack update
 stack install --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin --flag git-annex:magicmime --flag git-annex:dbus
