@@ -52,9 +52,12 @@ requirements:
     - sqlite
     - dbus
     - libffi
+    - libxml2
   run:
     - rsync
     - git
+    - libmagic
+    - curl
 
 test:
   commands:
@@ -63,9 +66,15 @@ test:
 
 about:
   home: http://git-annex.branchable.com
-  license: GPL-3
+  license: AGPL-3.0
+  license_family: AGPL
   license_file: LICENSE
   summary: A tool for managing large files with git
+  description: |
+    git-annex allows managing files with git, without checking the file contents into git.
+    It is useful when dealing with files larger than git can currently easily handle.
+    The contents can be stored locally or in various remote repositories; git-annex tracks
+    which contents is stored where.
 
 extra:
   recipe-maintainers:
