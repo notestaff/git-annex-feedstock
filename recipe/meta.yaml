@@ -3,6 +3,7 @@
 {% set sha256 = "4feafd05ccd815da2d9cc8da1e0e05ae5b8b0b8af96bcf6b7b2fe1539b50be9a" %}
 {% set ghc_src_version = "8.6.5" %}
 {% set ghc_src_sha256 = "4d4aa1e96f4001b934ac6193ab09af5d6172f41f5a5d39d8e43393b9aafee361" %}
+{% set ghc_src_testsuite_sha256 = "21391cb63a8a6b327f6c9519217a3dad39493e72c48967008ae35af142ca895f" %}
 {% set ghc_bootstrap_version = "8.4.2" %}
 {% set ghc_bootstrap_sha256 = "28c31489ed9a83af4400685ec8bc72a6d43d08958d75b2dc35d29a894a5c9d93" %}
 
@@ -24,6 +25,10 @@ source:
 
   - url: https://downloads.haskell.org/~ghc/{{ ghc_src_version }}/ghc-{{ ghc_src_version }}-src.tar.xz
     sha256: {{ ghc_src_sha256 }}
+    folder: ghc_src
+
+  - url: https://downloads.haskell.org/~ghc/{{ ghc_src_version }}/ghc-{{ ghc_src_version }}-testsuite.tar.xz
+    sha256: {{ ghc_src_testsuite_sha256 }}
     folder: ghc_src
 
 build:

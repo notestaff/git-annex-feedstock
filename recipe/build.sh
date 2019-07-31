@@ -82,6 +82,7 @@ set +e
 make -j${CPU_COUNT}
 set -e
 make
+make test THREADS=${CPU_COUNT}
 make install
 ghc-pkg recache
 popd
