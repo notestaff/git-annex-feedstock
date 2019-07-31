@@ -77,7 +77,7 @@ echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-libr
 echo "STRIP_CMD = $STRIP" >> build.mk
 
 ./boot
-./configure --prefix=${BUILD_PREFIX}  --with-gmp-includes=$PREFIX/include --with-gmp-libraries=$PREFIX/libraries
+./configure --prefix=${BUILD_PREFIX}  --with-gmp-includes=$PREFIX/include --with-gmp-libraries=$PREFIX/libraries --with-system-libffi
 set +e
 make -j${CPU_COUNT}
 set -e

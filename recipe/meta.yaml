@@ -51,6 +51,7 @@ requirements:
     - libmagic
     - sqlite
     - dbus
+    - libffi
   run:
     - rsync
     - git
