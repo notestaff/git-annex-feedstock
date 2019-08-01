@@ -1,14 +1,30 @@
 {% set name = "git-annex" %}
-{% set version = "7.20190708" %}
-{% set sha256 = "32d27f64c5d26a3c0c1f3fd445791f1e105b216cb7a4940ee915ddccf53045a3" %}
+{% set version = "7.20190730" %}
+{% set sha256 = "4feafd05ccd815da2d9cc8da1e0e05ae5b8b0b8af96bcf6b7b2fe1539b50be9a" %}
+{% set ghc_src_version = "8.6.5" %}
+{% set ghc_src_sha256 = "4d4aa1e96f4001b934ac6193ab09af5d6172f41f5a5d39d8e43393b9aafee361" %}
+{% set ghc_bootstrap_version = "8.4.2" %}
+{% set ghc_bootstrap_sha256 = "28c31489ed9a83af4400685ec8bc72a6d43d08958d75b2dc35d29a894a5c9d93" %}
+
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  - url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
+    sha256: {{ sha256 }}
+    folder: git_annex_main
+    patches:
+      - 0001-added-extra-deps-for-fdo-notify-and-magic.patch
+
+  - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-centos67-linux.tar.xz
+    sha256: {{ ghc_bootstrap_sha256 }}
+    folder: ghc_bootstrap
+
+  - url: https://downloads.haskell.org/~ghc/{{ ghc_src_version }}/ghc-{{ ghc_src_version }}-src.tar.xz
+    sha256: {{ ghc_src_sha256 }}
+    folder: ghc_src
 
 build:
   number: 0
@@ -22,28 +38,33 @@ requirements:
     - perl
     - coreutils
     - binutils
+    - pkg-config
+    - xz
+    - automake
+    - autoconf
+    - libtool
+    - bzip2
+    - ncurses
+    - libffi
   host:
     - gmp
     - zlib
     - ncurses
     - libmagic
-    - libxml2
     - sqlite
     - dbus
+    - libffi
+    - libxml2
   run:
+    - rsync
     - git
     - libmagic
-    - rsync
     - curl
 
 test:
-  requires:
-    - datalad
-    - nose
   commands:
     - git-annex version
     - git-annex test
-    - datalad test
 
 about:
   home: http://git-annex.branchable.com
