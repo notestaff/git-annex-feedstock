@@ -4,7 +4,7 @@
 {% set ghc_src_version = "8.6.5" %}
 {% set ghc_src_sha256 = "4d4aa1e96f4001b934ac6193ab09af5d6172f41f5a5d39d8e43393b9aafee361" %}
 {% set ghc_bootstrap_version = "8.4.2" %}
-{% set ghc_bootstrap_sha256 = "28c31489ed9a83af4400685ec8bc72a6d43d08958d75b2dc35d29a894a5c9d93" %}
+{% set ghc_bootstrap_sha256 = "87469222042b9ac23f9db216a8d4e5107297bdbbb99df71eb4d9e7208455def2" %}
 
 
 package:
@@ -18,7 +18,7 @@ source:
     patches:
       - 0001-added-extra-deps-for-fdo-notify-and-magic.patch
 
-  - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-centos67-linux.tar.xz
+  - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-apple-darwin-linux.tar.xz
     sha256: {{ ghc_bootstrap_sha256 }}
     folder: ghc_bootstrap
 
