@@ -93,43 +93,43 @@ if [[ -f "${HOST_LIBPTHREAD}" ]]; then
     ln -s /lib64/libpthread.so.0 ${HOST_LIBPTHREAD}
 fi
 
-#######################################################################################################
-# Install bootstrap ghc
-#######################################################################################################
+# #######################################################################################################
+# # Install bootstrap ghc
+# #######################################################################################################
 
-export GHC_BOOTSTRAP_PREFIX=${SRC_DIR}/ghc_bootstrap_pfx
-mkdir -p $GHC_BOOTSTRAP_PREFIX/bin
-export PATH=$PATH:${GHC_BOOTSTRAP_PREFIX}/bin
+# export GHC_BOOTSTRAP_PREFIX=${SRC_DIR}/ghc_bootstrap_pfx
+# mkdir -p $GHC_BOOTSTRAP_PREFIX/bin
+# export PATH=$PATH:${GHC_BOOTSTRAP_PREFIX}/bin
 
-pushd ${SRC_DIR}/ghc_bootstrap
-./configure --prefix=${GHC_BOOTSTRAP_PREFIX}  || cat config.log
-make install
-ghc-pkg recache
+# pushd ${SRC_DIR}/ghc_bootstrap
+# ./configure --prefix=${GHC_BOOTSTRAP_PREFIX}  || cat config.log
+# make install
+# ghc-pkg recache
 
-popd
+# popd
 
-#######################################################################################################
-# Build recent ghc from source
-#######################################################################################################
+# #######################################################################################################
+# # Build recent ghc from source
+# #######################################################################################################
 
-pushd ${SRC_DIR}/ghc_src
+# pushd ${SRC_DIR}/ghc_src
 
-touch mk/build.mk
-echo "HADDOCK_DOCS = NO" >> mk/build.mk
-echo "BuildFlavour = quick" >> mk/build.mk
-echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-includes=$PREFIX/include" >> mk/build.mk
-echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-libraries=$PREFIX/lib" >> mk/build.mk
-echo "STRIP_CMD = $STRIP" >> build.mk
+# touch mk/build.mk
+# echo "HADDOCK_DOCS = NO" >> mk/build.mk
+# echo "BuildFlavour = quick" >> mk/build.mk
+# echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-includes=$PREFIX/include" >> mk/build.mk
+# echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-libraries=$PREFIX/lib" >> mk/build.mk
+# echo "STRIP_CMD = $STRIP" >> build.mk
 
-./boot
-./configure --prefix=${BUILD_PREFIX}  --with-gmp-includes=$PREFIX/include --with-gmp-libraries=$PREFIX/libraries --with-system-libffi
-set +e
-make -j${CPU_COUNT}
-set -e
-make
-make install
-ghc-pkg recache
-popd
+# ./boot
+# ./configure --prefix=${BUILD_PREFIX}  --with-gmp-includes=$PREFIX/include --with-gmp-libraries=$PREFIX/libraries --with-system-libffi
+# set +e
+# make -j${CPU_COUNT}
+# set -e
+# make
+# make install
+# ghc-pkg recache
+# popd
 
 #######################################################################################################
 # Build git-annex
@@ -147,7 +147,7 @@ mkdir -p $STACK_ROOT
     echo "ghc-options:"
     echo "  \"\$everything\": -optc-I${PREFIX}/include -optl-L${PREFIX}/lib"
     echo "apply-ghc-options: everything"
-    echo "system-ghc: true"
+#    echo "system-ghc: true"
 ) > "${STACK_ROOT}/config.yaml"
 
 stack setup
