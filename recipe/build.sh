@@ -2,6 +2,9 @@
 
 set -e -o pipefail -x
 
+echo "STARTING GIT-ANNEX BUILD; env is"
+env
+
 #######################################################################################################
 # Set up build environment
 #######################################################################################################
@@ -15,11 +18,15 @@ export CPPFLAGS="-I${PREFIX}/include ${CPPFLAGS} "
 export GMP_INCLUDE_DIRS=$PREFIX/include
 export GMP_LIB_DIRS=$PREFIX/lib
 
+echo "BEFORE INSTALLING SHIM SCRIPTS; env is"
+env
+
 #
 # Install shim scripts to ensure that certain flags are always passed to the compiler/linker
 #
 
 if [ -n "${CC:+1}" ]; then
+    export CC=$(realpath "$CC")
     echo "#!/bin/bash" > $CC-shim
     echo "set -e -o pipefail -x " >> $CC-shim
     echo "$CC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $CC-shim
@@ -28,6 +35,7 @@ if [ -n "${CC:+1}" ]; then
 fi
 
 if [ -n "${CXX:+1}" ]; then
+    export CXX=$(realpath "$CXX")
     echo "#!/bin/bash" > $CXX-shim
     echo "set -e -o pipefail -x " >> $CXX-shim
     echo "$CXX -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $CXX-shim
@@ -36,6 +44,7 @@ if [ -n "${CXX:+1}" ]; then
 fi
 
 if [ -n "${GCC:+1}" ]; then
+    export GCC=$(realpath "$GCC")
     echo "#!/bin/bash" > $GCC-shim
     echo "set -e -o pipefail -x " >> $GCC-shim
     echo "$GCC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GCC-shim
@@ -44,6 +53,7 @@ if [ -n "${GCC:+1}" ]; then
 fi
 
 if [ -n "${GXX:+1}" ]; then
+    export GXX=$(realpath "$GXX")
     echo "#!/bin/bash" > $GXX-shim
     echo "set -e -o pipefail -x " >> $GXX-shim
     echo "$GXX -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GXX-shim
@@ -52,6 +62,7 @@ if [ -n "${GXX:+1}" ]; then
 fi
 
 if [ -n "${LD:+1}" ]; then
+    export LD=$(realpath "$LD")
     echo "#!/bin/bash" > $LD-shim
     echo "set -e -o pipefail -x " >> $LD-shim
     echo "$LD -L$PREFIX/lib \"\$@\"" >> $LD-shim
@@ -60,12 +71,20 @@ if [ -n "${LD:+1}" ]; then
 fi
 
 if [ -n "${LD_GOLD:+1}" ]; then
+    export LD_GOLD=$(realpath "${LD_GOLD}")
     echo "#!/bin/bash" > ${LD}.gold
     echo "set -e -o pipefail -x " >> ${LD}.gold
     echo "$LD_GOLD -L$PREFIX/lib \"\$@\"" >> ${LD}.gold
     chmod u+x ${LD}.gold
     export LD_GOLD=${LD}.gold
 fi
+
+echo "AFTER INSTALLING SHIM SCRIPTS; env is"
+env
+
+#
+# Hack: ensure that the correct libpthread is used
+#
 
 HOST_LIBPTHREAD="${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libpthread.so"
 
