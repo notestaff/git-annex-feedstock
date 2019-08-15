@@ -18,7 +18,7 @@ source:
     patches:
       - 0001-added-extra-deps-for-fdo-notify-and-magic.patch
 
-  - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-apple-darwin-linux.tar.xz
+  - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-apple-darwin.tar.xz
     sha256: {{ ghc_bootstrap_sha256 }}
     folder: ghc_bootstrap
 
