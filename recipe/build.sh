@@ -145,12 +145,12 @@ mkdir -p $STACK_ROOT
     echo "extra-lib-dirs:"
     echo "- ${PREFIX}/lib"
     echo "ghc-options:"
-    echo "  \"\$everything\": -optc-I${PREFIX}/include -optl-L${PREFIX}/lib"
+    echo "  \"\$everything\": -v -optc-I${PREFIX}/include -optl-L${PREFIX}/lib"
     echo "apply-ghc-options: everything"
 #    echo "system-ghc: true"
 ) > "${STACK_ROOT}/config.yaml"
 
-stack setup
+stack setup --verbose
 stack update
 stack install --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin --flag git-annex:magicmime --flag git-annex:dbus
 ln -s ${PREFIX}/bin/git-annex ${PREFIX}/bin/git-annex-shell
