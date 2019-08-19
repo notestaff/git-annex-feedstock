@@ -43,10 +43,19 @@ echo "$LD_GOLD -L$PREFIX/lib \"\$@\"" >> ${LD}.gold
 chmod u+x ${LD}.gold
 export LD_GOLD=${LD}.gold
 
+#
+# Hack: ensure that the correct libpthread is used.
+# This fixes an issue specific to https://github.com/conda-forge/docker-images/tree/master/linux-anvil-comp7
+# which I do not fully understand, but the fix seems to work.
+# See https://github.com/conda/conda/issues/8380
+#
+
 HOST_LIBPTHREAD="${BUILD_PREFIX}/${HOST}/sysroot/usr/lib/libpthread.so"
 
-rm ${HOST_LIBPTHREAD}
-ln -s /lib64/libpthread.so.0 ${HOST_LIBPTHREAD}
+if [[ -f "${HOST_LIBPTHREAD}" ]]; then
+    rm ${HOST_LIBPTHREAD}
+    ln -s /lib64/libpthread.so.0 ${HOST_LIBPTHREAD}
+fi
 
 #######################################################################################################
 # Install bootstrap ghc
