@@ -1,11 +1,22 @@
 {% set name = "git-annex" %}
-{% set version = "7.20190730" %}
-{% set sha256 = "4feafd05ccd815da2d9cc8da1e0e05ae5b8b0b8af96bcf6b7b2fe1539b50be9a" %}
+{% set version = "7.20190819" %}
+{% set sha256 = "9e794baf81f3fcc0359ec9c0f22f5d5cad1ea9446958e53acafe747c48ef7ebb" %}
+
+#
+# This recipe builds GHC, the Haskell compiler used to compile git-annex, from source, then uses it
+# to compile git-annex.  It would be better to separate GHC into its own recipe, and have the
+# git-annex recipe depend on that, but I could not make that work.  Hopefully someone with a better
+# understanding of ghc and conda-forge can eventually rewrite the recipes in the more proper way.
+#
+# For related discussions see
+# https://github.com/conda-forge/git-annex-feedstock/pull/44
+# https://github.com/bioconda/bioconda-recipes/pull/16008
+#
+
 {% set ghc_src_version = "8.6.5" %}
 {% set ghc_src_sha256 = "4d4aa1e96f4001b934ac6193ab09af5d6172f41f5a5d39d8e43393b9aafee361" %}
 {% set ghc_bootstrap_version = "8.4.2" %}
-{% set ghc_bootstrap_sha256 = "28c31489ed9a83af4400685ec8bc72a6d43d08958d75b2dc35d29a894a5c9d93" %}
-
+{% set ghc_bootstrap_linux_sha256 = "28c31489ed9a83af4400685ec8bc72a6d43d08958d75b2dc35d29a894a5c9d93" %}
 
 package:
   name: {{ name }}
@@ -18,8 +29,8 @@ source:
     patches:
       - 0001-added-extra-deps-for-fdo-notify-and-magic.patch
 
-  - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-centos67-linux.tar.xz
-    sha256: {{ ghc_bootstrap_sha256 }}
+  - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-centos67-linux.tar.xz  # [linux]
+    sha256: {{ ghc_bootstrap_linux_sha256 }}  # [linux]
     folder: ghc_bootstrap
 
   - url: https://downloads.haskell.org/~ghc/{{ ghc_src_version }}/ghc-{{ ghc_src_version }}-src.tar.xz
