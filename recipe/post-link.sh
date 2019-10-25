@@ -10,7 +10,8 @@ function msg {
 msg
 msg '============= This git-annex version introduces breaking changes  ==========================================='
 msg 'In short: the behavior of "git add" may be affected depending on your configuration.                         '
-msg 'Please see https://git-annex.branchable.com/news/version_${PKG_VERSION}/ for details of what changed.        '
+msg "Please see https://git-annex.branchable.com/news/version_${PKG_VERSION}/ for details of what changed.        "
 msg '============================================================================================================='
+
 
 
