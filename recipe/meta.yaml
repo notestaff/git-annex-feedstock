@@ -71,6 +71,7 @@ requirements:
     - git >=2.1
     - libmagic
     - curl
+    - libiconv
 
 test:
   commands:
