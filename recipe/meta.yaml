@@ -38,7 +38,7 @@ source:
     folder: ghc_src
 
 build:
-  number: 0
+  number: 1
   skip: True  # [not linux]
 
 requirements:
@@ -66,6 +66,7 @@ requirements:
     - dbus
     - libffi
     - libxml2
+    - openssh
   run:
     - rsync
     - git >=2.1
