@@ -67,12 +67,15 @@ requirements:
     - libffi
     - libxml2
     - openssh
+    - lsof
   run:
     - rsync
     - git >=2.1
     - libmagic
     - curl
     - libiconv
+    - openssh
+    - lsof
 
 test:
   commands:
