@@ -38,7 +38,7 @@ source:
     folder: ghc_src
 
 build:
-  number: 1
+  number: 2
   skip: True  # [not linux]
 
 requirements:
@@ -47,7 +47,6 @@ requirements:
     - {{ compiler('cxx') }}
     - stack >=1.9.3
     - perl
-    - coreutils
     - binutils
     - pkg-config
     - xz
@@ -58,6 +57,7 @@ requirements:
     - ncurses
     - libffi
   host:
+    - coreutils
     - gmp
     - zlib
     - ncurses
@@ -76,6 +76,7 @@ requirements:
     - libiconv
     - openssh
     - lsof
+    - coreutils
 
 test:
   commands:
