@@ -78,9 +78,13 @@ requirements:
     - lsof
 
 test:
+  requires:
+    - datalad
+    - nose
   commands:
     - git-annex version
-    - git-annex test
+    #- git-annex test
+    - datalad test
 
 about:
   home: http://git-annex.branchable.com
