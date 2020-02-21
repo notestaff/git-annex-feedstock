@@ -116,6 +116,6 @@ mkdir -p $STACK_ROOT
 
 stack setup
 stack update
-stack install --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin --flag git-annex:magicmime --flag git-annex:dbus
+stack install --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin --flag git-annex:magicmime --flag git-annex:dbus --flag git-annex:debuglocks
 ln -s ${PREFIX}/bin/git-annex ${PREFIX}/bin/git-annex-shell
 popd
