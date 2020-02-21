@@ -69,6 +69,7 @@ requirements:
     - libiconv
     - openssh
     - lsof
+    - rsync
   run:
     - rsync
     - git >=2.1
