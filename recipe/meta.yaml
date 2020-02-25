@@ -38,7 +38,7 @@ source:
     folder: ghc_src
 
 build:
-  number: 1
+  number: 2
   skip: True  # [not linux]
 
 requirements:
@@ -72,7 +72,7 @@ requirements:
     - rsync
   run:
     - rsync
-    - git >=2.1
+    - git >=2
     - curl
     - openssh
     - lsof
