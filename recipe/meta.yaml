@@ -97,8 +97,7 @@ source:
 build:
   number: {{ build }}
   skip: True  # [not linux]
-  script: build_standalone.sh  # [standalone]
-
+  string: "standalone_h{{ PKG_HASH }}_{{ build }}"
 {% endif %}
 
 test:
