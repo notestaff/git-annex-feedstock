@@ -9,6 +9,6 @@ mkdir -p $BINARY_HOME
 mkdir -p $PACKAGE_HOME
 
 cp ${SRC_DIR}/git-annex-standalone-amd64.tar.gz_ ${PACKAGE_HOME}/git-annex-standalone-amd64.tar.gz
-tar -C ${PACKAGE_HOME} -xvfz  ${PACKAGE_HOME}/git-annex-standalone-amd64.tar.gz
+tar -C ${PACKAGE_HOME} -xvzf  ${PACKAGE_HOME}/git-annex-standalone-amd64.tar.gz
 ln -s ${PACKAGE_HOME}/git-annex.linux/git-annex $PREFIX/bin/
 ln -s ${PACKAGE_HOME}/git-annex.linux/git-annex-shell $PREFIX/bin/
