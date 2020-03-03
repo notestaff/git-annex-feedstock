@@ -2,6 +2,15 @@
 {% set version = "8.20200226" %}
 {% set sha256 = "3545ec1c3ba179de15c1fce24f88b27c47dacfbf367f9a4e8de1271ea2056827" %}
 
+{% set standalone = True %}  # [standalone]
+{% set standalone = False %}  # [not standalone]
+
+{% set build = 1 %}
+# prioritize non-standalone variant via build number
+{% if not standalone %}
+{% set build = build + 100 %}
+{% endif %}
+
 #
 # This recipe builds GHC, the Haskell compiler used to compile git-annex, from source, then uses it
 # to compile git-annex.  It would be better to separate GHC into its own recipe, and have the
@@ -22,6 +31,7 @@ package:
   name: {{ name }}
   version: {{ version }}
 
+{% if not standalone %}
 source:
   - url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
@@ -38,8 +48,9 @@ source:
     folder: ghc_src
 
 build:
-  number: 0
+  number: {{ build }}
   skip: True  # [not linux]
+  string: "h{{ PKG_HASH }}_{{ build }}"  # [not standalone]
 
 requirements:
   build:
@@ -76,6 +87,19 @@ requirements:
     - curl
     - openssh
     - lsof
+{% endif %}
+
+{% if standalone %}
+source:
+  - url: https://downloads.kitenet.net/git-annex/linux/current/git-annex-standalone-amd64.tar.gz
+    fn: git-annex-standalone-amd64.tar.gz_
+
+build:
+  number: {{ build }}
+  skip: True  # [not linux]
+  script: build_standalone.sh  # [standalone]
+
+{% endif %}
 
 test:
   commands:

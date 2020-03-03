@@ -8,6 +8,8 @@ channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
+curl:
+- '7.64'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
@@ -31,6 +33,8 @@ perl:
 pin_run_as_build:
   bzip2:
     max_pin: x
+  curl:
+    max_pin: x
   dbus:
     max_pin: x
   gmp:
@@ -53,6 +57,8 @@ pin_run_as_build:
     max_pin: x.x
 sqlite:
 - '3'
+standalone:
+- 'False'
 xz:
 - '5.2'
 zlib:
