@@ -51,6 +51,7 @@ build:
   number: {{ build }}
   skip: True  # [not linux]
   string: "h{{ PKG_HASH }}_{{ build }}"  # [not standalone]
+  script: build_standaloneFalse.sh
 
 requirements:
   build:
@@ -98,6 +99,7 @@ build:
   number: {{ build }}
   skip: True  # [not linux]
   string: "standalone_h{{ PKG_HASH }}_{{ build }}"
+  script: build_standaloneTrue.sh
 {% endif %}
 
 test:
