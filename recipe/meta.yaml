@@ -1,13 +1,14 @@
 {% set name = "git-annex" %}
 {% set version = "8.20200226" %}
-{% set sha256 = "3545ec1c3ba179de15c1fce24f88b27c47dacfbf367f9a4e8de1271ea2056827" %}
+{% set sha256 = "3545ec1c3ba179de15c1fce24f88b27c47dacfbf367f9a4e8de1271ea2056827" %}  # [not nodep]
+{% set sha256 = "d7d22864ecff78db2087ac2560c3c900f7ed88413359426f1e85c4f51a7de494" %}  # [nodep]
 
-{% set standalone = True %}  # [standalone]
-{% set standalone = False %}  # [not standalone]
+{% set nodep = True %}  # [nodep]
+{% set nodep = False %}  # [not nodep]
 
 {% set build = 1 %}
-# prioritize non-standalone variant via build number
-{% if not standalone %}
+# prioritize non-nodep variant via build number
+{% if not nodep %}
 {% set build = build + 100 %}
 {% endif %}
 
@@ -31,7 +32,7 @@ package:
   name: {{ name }}
   version: {{ version }}
 
-{% if not standalone %}
+{% if not nodep %}
 source:
   - url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
@@ -50,8 +51,8 @@ source:
 build:
   number: {{ build }}
   skip: True  # [not linux]
-  string: "h{{ PKG_HASH }}_{{ build }}"  # [not standalone]
-  script: ${RECIPE_DIR}/build_standaloneFalse.sh
+  string: "h{{ PKG_HASH }}_{{ build }}"  # [not nodep]
+  script: ${RECIPE_DIR}/build_nodepFalse.sh
 
 requirements:
   build:
@@ -84,22 +85,24 @@ requirements:
     - rsync
   run:
     - rsync
-    - git >=2
+    - git >=2.22
     - curl
     - openssh
     - lsof
 {% endif %}
 
-{% if standalone %}
+{% if nodep %}
 source:
-  - url: https://downloads.kitenet.net/git-annex/linux/current/git-annex-standalone-amd64.tar.gz
-    fn: git-annex-standalone-amd64.tar.gz_
+  - url: https://downloads.kitenet.net/git-annex/linux/current/git-annex-nodep-amd64.tar.gz
+    sha256: {{ sha256 }}
+    patches:
+      - 0001-fix-long-paths-in-locales.patch
 
 build:
   number: {{ build }}
   skip: True  # [not linux]
-  string: "standalone_h{{ PKG_HASH }}_{{ build }}"
-  script: ${RECIPE_DIR}/build_standaloneTrue.sh
+  string: "nodep_h{{ PKG_HASH }}_{{ build }}"
+  script: ${RECIPE_DIR}/build_nodepTrue.sh
 {% endif %}
 
 test:

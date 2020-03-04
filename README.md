@@ -33,17 +33,17 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_standaloneFalse</td>
+              <td>linux_nodepFalse</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5002&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/git-annex-feedstock?branchName=master&jobName=linux&configuration=linux_standaloneFalse" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/git-annex-feedstock?branchName=master&jobName=linux&configuration=linux_nodepFalse" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_standaloneTrue</td>
+              <td>linux_nodepTrue</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5002&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/git-annex-feedstock?branchName=master&jobName=linux&configuration=linux_standaloneTrue" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/git-annex-feedstock?branchName=master&jobName=linux&configuration=linux_nodepTrue" alt="variant">
                 </a>
               </td>
             </tr>
