@@ -1,0 +1,65 @@
+bzip2:
+- '1'
+c_compiler:
+- gcc
+c_compiler_version:
+- '7'
+channel_sources:
+- conda-forge,defaults
+channel_targets:
+- conda-forge main
+curl:
+- '7.64'
+cxx_compiler:
+- gxx
+cxx_compiler_version:
+- '7'
+dbus:
+- '1'
+docker_image:
+- condaforge/linux-anvil-comp7
+gmp:
+- '6'
+libffi:
+- '3.2'
+libiconv:
+- '1.15'
+libxml2:
+- '2.9'
+ncurses:
+- '6.1'
+nodep:
+- 'False'
+perl:
+- 5.26.2
+pin_run_as_build:
+  bzip2:
+    max_pin: x
+  curl:
+    max_pin: x
+  dbus:
+    max_pin: x
+  gmp:
+    max_pin: x
+  libffi:
+    max_pin: x.x
+  libiconv:
+    max_pin: x.x
+  libxml2:
+    max_pin: x.x
+  ncurses:
+    max_pin: x.x
+  perl:
+    max_pin: x.x.x
+  sqlite:
+    max_pin: x
+  xz:
+    max_pin: x.x
+  zlib:
+    max_pin: x.x
+sqlite:
+- '3'
+xz:
+- '5.2'
+zlib:
+- '1.2'
