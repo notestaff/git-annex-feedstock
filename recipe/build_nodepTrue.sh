@@ -9,5 +9,5 @@ mkdir -p $BINARY_HOME
 mkdir -p $PACKAGE_HOME
 
 mv * ${PACKAGE_HOME}/
-ln -s ${PACKAGE_HOME}/git-annex.linux/git-annex $PREFIX/bin/
-ln -s ${PACKAGE_HOME}/git-annex.linux/git-annex-shell $PREFIX/bin/
+ln -s ${PACKAGE_HOME}/git-annex $PREFIX/bin/
+ln -s ${PACKAGE_HOME}/git-annex-shell $PREFIX/bin/
