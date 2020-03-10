@@ -86,7 +86,7 @@ requirements:
     - openssh
     - lsof
     - rsync
-    - gsasl
+    - libgsasl
   run:
     - rsync
     - git >=2.22
