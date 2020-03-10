@@ -78,6 +78,9 @@ mkdir -p $GHC_BOOTSTRAP_PREFIX/bin
 export PATH=$PATH:${GHC_BOOTSTRAP_PREFIX}/bin
 
 pushd ${SRC_DIR}/ghc_bootstrap
+echo AAAAAAAAAAAAAAAABOUT to run configure
+pwd
+ls -l
 ./configure --prefix=${GHC_BOOTSTRAP_PREFIX}
 make install
 ghc-pkg recache
