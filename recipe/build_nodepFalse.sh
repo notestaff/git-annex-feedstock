@@ -22,37 +22,53 @@ export GMP_LIB_DIRS=$PREFIX/lib
 if [ -z ${CC+x} ]; then
     echo "CC is unset";
 else
+    echo "CC is $CC"
+    export CC=$(which $CC)
+    echo "CC after which is $CC"
+
     echo "#!/bin/bash" > $CC-shim
     echo "set -e -o pipefail -x " >> $CC-shim
     echo "$CC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $CC-shim
     chmod u+x $CC-shim
     export CC=$CC-shim
+    echo "CC after shim is $CC"
 fi
 
 if [ -z ${GCC+x} ]; then
     echo "GCC is unset";
 else
+    echo "GCC is $GCC"
+    export GCC=$(which $GCC)
+    echo "GCC after which is $GCC"
+
     echo "#!/bin/bash" > $GCC-shim
     echo "set -e -o pipefail -x " >> $GCC-shim
     echo "$GCC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GCC-shim
     chmod u+x $GCC-shim
     export GCC=$GCC-shim
+    echo "GCC after shim is $GCC"
 fi
 
 if [ -z ${LD+x} ]; then
     echo "LD is unset";
 else
+    echo "LD is $LD"
+    export LD=$(which $LD)
+    echo "LD after which is $LD"
+
     echo "#!/bin/bash" > $LD-shim
     echo "set -e -o pipefail -x " >> $LD-shim
     echo "$LD -L$PREFIX/lib \"\$@\"" >> $LD-shim
     chmod u+x $LD-shim
     export LD=$LD-shim
+    echo "LD after shim is $LD"
 
     echo "#!/bin/bash" > ${LD}.gold
     echo "set -e -o pipefail -x " >> ${LD}.gold
     echo "$LD_GOLD -L$PREFIX/lib \"\$@\"" >> ${LD}.gold
     chmod u+x ${LD}.gold
     export LD_GOLD=${LD}.gold
+    echo "LD_GOLD after shim is ${LD_GOLD}"
 fi
 
 #
