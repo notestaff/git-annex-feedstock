@@ -19,29 +19,41 @@ export GMP_LIB_DIRS=$PREFIX/lib
 # Install shim scripts to ensure that certain flags are always passed to the compiler/linker
 #
 
-echo "#!/bin/bash" > $CC-shim
-echo "set -e -o pipefail -x " >> $CC-shim
-echo "$CC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $CC-shim
-chmod u+x $CC-shim
-export CC=$CC-shim
+if [ -z ${CC+x} ]; then
+    echo "CC is unset";
+else
+    echo "#!/bin/bash" > $CC-shim
+    echo "set -e -o pipefail -x " >> $CC-shim
+    echo "$CC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $CC-shim
+    chmod u+x $CC-shim
+    export CC=$CC-shim
+fi
 
-echo "#!/bin/bash" > $GCC-shim
-echo "set -e -o pipefail -x " >> $GCC-shim
-echo "$GCC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GCC-shim
-chmod u+x $GCC-shim
-export GCC=$GCC-shim
+if [ -z ${GCC+x} ]; then
+    echo "GCC is unset";
+else
+    echo "#!/bin/bash" > $GCC-shim
+    echo "set -e -o pipefail -x " >> $GCC-shim
+    echo "$GCC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GCC-shim
+    chmod u+x $GCC-shim
+    export GCC=$GCC-shim
+fi
 
-echo "#!/bin/bash" > $LD-shim
-echo "set -e -o pipefail -x " >> $LD-shim
-echo "$LD -L$PREFIX/lib \"\$@\"" >> $LD-shim
-chmod u+x $LD-shim
-export LD=$LD-shim
+if [ -z ${LD+x} ]; then
+    echo "LD is unset";
+else
+    echo "#!/bin/bash" > $LD-shim
+    echo "set -e -o pipefail -x " >> $LD-shim
+    echo "$LD -L$PREFIX/lib \"\$@\"" >> $LD-shim
+    chmod u+x $LD-shim
+    export LD=$LD-shim
 
-echo "#!/bin/bash" > ${LD}.gold
-echo "set -e -o pipefail -x " >> ${LD}.gold
-echo "$LD_GOLD -L$PREFIX/lib \"\$@\"" >> ${LD}.gold
-chmod u+x ${LD}.gold
-export LD_GOLD=${LD}.gold
+    echo "#!/bin/bash" > ${LD}.gold
+    echo "set -e -o pipefail -x " >> ${LD}.gold
+    echo "$LD_GOLD -L$PREFIX/lib \"\$@\"" >> ${LD}.gold
+    chmod u+x ${LD}.gold
+    export LD_GOLD=${LD}.gold
+fi
 
 #
 # Hack: ensure that the correct libpthread is used.
