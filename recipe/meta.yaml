@@ -84,14 +84,14 @@ requirements:
     - libffi
     - libiconv
     - openssh
-    - lsof
+    - lsof  # [linux]
     - rsync
   run:
     - rsync
     - git >=2.22
     - curl
     - openssh
-    - lsof
+    - lsof  # [linux]
 {% endif %}
 
 {% if nodep %}
