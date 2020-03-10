@@ -40,7 +40,8 @@ source:
     sha256: {{ sha256 }}
     folder: git_annex_main
     patches:
-      - 0001-added-extra-deps-for-fdo-notify-and-magic.patch
+      - 0001-added-extra-deps-for-fdo-notify-and-magic.patch  # [v7]
+      - 0001-new-patch-to-add-fdo-notify-and-magic.patch  # [not v7]
 
   - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-centos67-linux.tar.xz  # [linux]
     sha256: {{ ghc_bootstrap_linux_sha256 }}  # [linux]
