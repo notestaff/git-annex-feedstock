@@ -10,12 +10,12 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      linux_nodepFalse:
-        CONFIG: linux_nodepFalse
+      linux_v7False:
+        CONFIG: linux_v7False
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
-      linux_nodepTrue:
-        CONFIG: linux_nodepTrue
+      linux_v7True:
+        CONFIG: linux_v7True
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
   steps:
