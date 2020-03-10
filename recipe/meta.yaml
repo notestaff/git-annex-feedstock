@@ -77,7 +77,6 @@ requirements:
     - ncurses
     - libffi
     - libxml2
-    - libiconv  # [osx]
   host:
     - gmp
     - zlib
