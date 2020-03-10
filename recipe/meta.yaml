@@ -27,9 +27,10 @@
 
 {% set ghc_src_version = "8.6.5" %}
 {% set ghc_src_sha256 = "4d4aa1e96f4001b934ac6193ab09af5d6172f41f5a5d39d8e43393b9aafee361" %}
-{% set ghc_bootstrap_version = "8.4.2" %}
+{% set ghc_bootstrap_version = "8.4.2" %}  # [linux]
+{% set ghc_bootstrap_version = "8.6.5" %}  # [osx]
 {% set ghc_bootstrap_sha256 = "28c31489ed9a83af4400685ec8bc72a6d43d08958d75b2dc35d29a894a5c9d93" %}  # [linux]
-{% set ghc_bootstrap_sha256 = "87469222042b9ac23f9db216a8d4e5107297bdbbb99df71eb4d9e7208455def2" %}  # [osx]
+{% set ghc_bootstrap_sha256 = "dfc1bdb1d303a87a8552aa17f5b080e61351f2823c2b99071ec23d0837422169" %}  # [osx]
 {% set ghc_boostrap_os = "centos67-linux" %}  # [linux]
 {% set ghc_boostrap_os = "apple-darwin" %}  # [osx]
 

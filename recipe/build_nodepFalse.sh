@@ -97,7 +97,7 @@ pushd ${SRC_DIR}/ghc_bootstrap
 echo AAAAAAAAAAAAAAAABOUT to run configure
 pwd
 ls -l
-./configure --prefix=${GHC_BOOTSTRAP_PREFIX} || cat config.log
+./configure --prefix=${GHC_BOOTSTRAP_PREFIX} --with-gmp-includes=$PREFIX/include --with-gmp-libraries=$PREFIX/lib || cat config.log
 make install
 ghc-pkg recache
 
