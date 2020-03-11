@@ -1,4 +1,4 @@
-From 902712a66830991c7c14c0d9f6af559ed9ef7c19 Mon Sep 17 00:00:00 2001
+From e37bdf55f0c5278fadfda3db5236ababfa26fed3 Mon Sep 17 00:00:00 2001
 From: Ilya Shlyakhter <ilya_shl@alum.mit.edu>
 Date: Tue, 10 Mar 2020 11:29:28 -0400
 Subject: [PATCH] new patch to add fdo-notify and magic and network
@@ -8,10 +8,10 @@ Subject: [PATCH] new patch to add fdo-notify and magic and network
  1 file changed, 3 insertions(+)
 
 diff --git a/stack.yaml b/stack.yaml
-index 487ccfa..99c8107 100644
+index 487ccfa..792254f 100644
 --- a/stack.yaml
 +++ b/stack.yaml
-@@ -15,7 +15,9 @@ flags:
+@@ -15,6 +15,9 @@ flags:
  packages:
  - '.'
  extra-deps:
