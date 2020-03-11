@@ -11,11 +11,11 @@ diff --git a/stack.yaml b/stack.yaml
 index 487ccfa..99c8107 100644
 --- a/stack.yaml
 +++ b/stack.yaml
-@@ -15,6 +15,9 @@ flags:
+@@ -15,7 +15,9 @@ flags:
  packages:
  - '.'
  extra-deps:
-+ - network-3.1.1.1
++ - network-2.8.0.1
 + - fdo-notify-0.3.1
 + - magic-1.1
   - IfElse-0.85
