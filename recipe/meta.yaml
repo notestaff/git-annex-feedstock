@@ -81,7 +81,6 @@ requirements:
     - ncurses
     - libffi
     - libxml2
-    - libiconv  # [osx]
   host:
     - gmp
     - zlib
@@ -90,7 +89,7 @@ requirements:
     - sqlite
     - dbus
     - libffi
-    - libiconv
+    - libiconv  # [not osx]
     - openssh
     - lsof  # [linux]
     - rsync
