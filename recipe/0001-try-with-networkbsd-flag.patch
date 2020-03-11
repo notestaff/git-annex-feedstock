@@ -1,0 +1,39 @@
+From 2c92a23504ab0bd46c6466f53a941a83222d9550 Mon Sep 17 00:00:00 2001
+From: Ilya Shlyakhter <ilya_shl@alum.mit.edu>
+Date: Tue, 10 Mar 2020 22:59:48 -0400
+Subject: [PATCH] try with networkbsd flag
+
+---
+ git-annex.cabal | 2 +-
+ stack.yaml      | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/git-annex.cabal b/git-annex.cabal
+index 15ed0c5..ba50949 100644
+--- a/git-annex.cabal
++++ b/git-annex.cabal
+@@ -287,7 +287,7 @@ Flag Dbus
+ 
+ Flag NetworkBSD
+   Description: Build with network-3.0 which split out network-bsd
+-  Default: True
++  Default: False
+ 
+ source-repository head
+   type: git
+diff --git a/stack.yaml b/stack.yaml
+index 487ccfa..b3aeb96 100644
+--- a/stack.yaml
++++ b/stack.yaml
+@@ -15,6 +15,8 @@ flags:
+ packages:
+ - '.'
+ extra-deps:
++ - network-2.8.0.1
++ - magic-1.1
+  - IfElse-0.85
+  - aws-0.21.1
+  - bloomfilter-2.0.1.0
+-- 
+2.23.1
+
