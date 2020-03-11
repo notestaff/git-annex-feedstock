@@ -108,9 +108,9 @@ ghc-pkg recache
 
 popd
 
-which cabal
-cabal update
-cabal install alex happy
+#which cabal
+#cabal update
+#cabal install alex happy
 
 #######################################################################################################
 # Build recent ghc from source
