@@ -93,11 +93,6 @@ fi
 # Install bootstrap ghc
 #######################################################################################################
 
-mv ${SRC_DIR}/ghc_stk/stack ${BUILD_PREFIX}/bin/
-chmod u+x ${BUILD_PREFIX}/bin/stack
-which stack
-stack --version
-
 # export GHC_BOOTSTRAP_PREFIX=${SRC_DIR}/ghc_bootstrap_pfx
 # mkdir -p $GHC_BOOTSTRAP_PREFIX/bin
 # export PATH=$PATH:${GHC_BOOTSTRAP_PREFIX}/bin
