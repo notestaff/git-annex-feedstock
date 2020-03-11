@@ -1,0 +1,30 @@
+From 40e0ca5c5f9ac50cf2da9b176f983aed16a3136b Mon Sep 17 00:00:00 2001
+From: Ilya Shlyakhter <ilya_shl@alum.mit.edu>
+Date: Tue, 10 Mar 2020 22:59:48 -0400
+Subject: [PATCH] added magic and network with networkbsd
+
+---
+ stack.yaml | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/stack.yaml b/stack.yaml
+index 487ccfa..b37fd6d 100644
+--- a/stack.yaml
++++ b/stack.yaml
+@@ -11,10 +11,12 @@ flags:
+     dbus: false
+     debuglocks: false
+     benchmark: false
+-    networkbsd: false
++    networkbsd: true
+ packages:
+ - '.'
+ extra-deps:
++ - network-3.1.1.1
++ - magic-1.1
+  - IfElse-0.85
+  - aws-0.21.1
+  - bloomfilter-2.0.1.0
+-- 
+2.23.1
+
