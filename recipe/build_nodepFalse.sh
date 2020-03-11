@@ -108,28 +108,32 @@ ghc-pkg recache
 
 popd
 
+which cabal
+cabal update
+cabal install alex happy
+
 #######################################################################################################
 # Build recent ghc from source
 #######################################################################################################
 
-pushd ${SRC_DIR}/ghc_src
+# pushd ${SRC_DIR}/ghc_src
 
-touch mk/build.mk
-echo "HADDOCK_DOCS = NO" >> mk/build.mk
-echo "BuildFlavour = quick" >> mk/build.mk
-echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-includes=$PREFIX/include" >> mk/build.mk
-echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-libraries=$PREFIX/lib" >> mk/build.mk
-echo "STRIP_CMD = $STRIP" >> build.mk
+# touch mk/build.mk
+# echo "HADDOCK_DOCS = NO" >> mk/build.mk
+# echo "BuildFlavour = quick" >> mk/build.mk
+# echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-includes=$PREFIX/include" >> mk/build.mk
+# echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-libraries=$PREFIX/lib" >> mk/build.mk
+# echo "STRIP_CMD = $STRIP" >> build.mk
 
-./boot
-./configure --prefix=${BUILD_PREFIX}  --with-gmp-includes=$PREFIX/include --with-gmp-libraries=$PREFIX/lib  --with-iconv-includes=$PREFIX/include --with-iconv-libraries=$PREFIX/lib --with-system-libffi
-set +e
-make -j${CPU_COUNT}
-set -e
-make
-make install
-ghc-pkg recache
-popd
+# ./boot
+# ./configure --prefix=${BUILD_PREFIX}  --with-gmp-includes=$PREFIX/include --with-gmp-libraries=$PREFIX/lib  --with-iconv-includes=$PREFIX/include --with-iconv-libraries=$PREFIX/lib --with-system-libffi
+# set +e
+# make -j${CPU_COUNT}
+# set -e
+# make
+# make install
+# ghc-pkg recache
+# popd
 
 #######################################################################################################
 # Build git-annex
