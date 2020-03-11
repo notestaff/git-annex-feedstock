@@ -1,0 +1,26 @@
+From 902712a66830991c7c14c0d9f6af559ed9ef7c19 Mon Sep 17 00:00:00 2001
+From: Ilya Shlyakhter <ilya_shl@alum.mit.edu>
+Date: Tue, 10 Mar 2020 11:29:28 -0400
+Subject: [PATCH] new patch to add fdo-notify and magic and network
+
+---
+ stack.yaml | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/stack.yaml b/stack.yaml
+index 487ccfa..99c8107 100644
+--- a/stack.yaml
++++ b/stack.yaml
+@@ -15,6 +15,9 @@ flags:
+ packages:
+ - '.'
+ extra-deps:
++ - network-3.1.1.1
++ - fdo-notify-0.3.1
++ - magic-1.1
+  - IfElse-0.85
+  - aws-0.21.1
+  - bloomfilter-2.0.1.0
+-- 
+2.23.1
+

@@ -45,8 +45,7 @@ source:
     folder: git_annex_main
     patches:
       - 0001-added-extra-deps-for-fdo-notify-and-magic.patch  # [v7]
-      - 0001-new-patch-to-add-fdo-notify-and-magic.patch  # [not v7]
-
+      - 0001-new-patch-to-add-fdo-notify-and-magic-and-network.patch  # [not v7]
   - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-{{ ghc_boostrap_os }}.tar.xz
     sha256: {{ ghc_bootstrap_sha256 }}
     folder: ghc_bootstrap
