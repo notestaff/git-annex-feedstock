@@ -55,6 +55,10 @@ source:
     sha256: {{ ghc_src_sha256 }}
     folder: ghc_src
 
+  - url: https://github.com/commercialhaskell/stack/releases/download/v2.1.3/stack-2.1.3-osx-x86_64.tar.gz
+    sha256: 84b05b9cdb280fbc4b3d5fe23d1fc82a468956c917e16af7eeeabec5e5815d9f
+    folder: ghc_stk
+
 build:
   number: {{ build }}
   skip: True  # [not osx]
@@ -65,7 +69,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - stack >=1.9.3
+    - stack >=1.9.3  # [linux]
     - perl
     - coreutils
     - binutils
