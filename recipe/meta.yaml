@@ -89,7 +89,7 @@ requirements:
     - sqlite
     - dbus
     - libffi
-    - libiconv  # [not osx]
+    - libiconv
     - openssh
     - lsof  # [linux]
     - rsync

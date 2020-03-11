@@ -6,6 +6,10 @@ set -e -o pipefail -x
 # Set up build environment
 #######################################################################################################
 
+echo "BUILDING: env is"
+env
+echo "END OF ENV"
+
 mkdir -p $PREFIX/bin $BUILD_PREFIX/bin $PREFIX/lib $BUILD_PREFIX/lib $PREFIX/share $BUILD_PREFIX/share
 export LIBRARY_PATH="${PREFIX}/lib:${LIBRARY_PATH}"
 export LD_LIBRARY_PATH="${PREFIX}/lib:${LD_LIBRARY_PATH}"
@@ -19,57 +23,57 @@ export GMP_LIB_DIRS=$PREFIX/lib
 # Install shim scripts to ensure that certain flags are always passed to the compiler/linker
 #
 
-if [ -z ${CC+x} ]; then
-    echo "CC is unset";
-else
-    echo "CC is $CC"
-    export CC=$(which $CC)
-    echo "CC after which is $CC"
+# if [ -z ${CC+x} ]; then
+#     echo "CC is unset";
+# else
+#     echo "CC is $CC"
+#     export CC=$(which $CC)
+#     echo "CC after which is $CC"
 
-    echo "#!/bin/bash" > $CC-shim
-    echo "set -e -o pipefail -x " >> $CC-shim
-    echo "$CC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $CC-shim
-    chmod u+x $CC-shim
-    export CC=$CC-shim
-    echo "CC after shim is $CC"
-fi
+#     echo "#!/bin/bash" > $CC-shim
+#     echo "set -e -o pipefail -x " >> $CC-shim
+#     echo "$CC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $CC-shim
+#     chmod u+x $CC-shim
+#     export CC=$CC-shim
+#     echo "CC after shim is $CC"
+# fi
 
-if [ -z ${GCC+x} ]; then
-    echo "GCC is unset";
-else
-    echo "GCC is $GCC"
-    export GCC=$(which $GCC)
-    echo "GCC after which is $GCC"
+# if [ -z ${GCC+x} ]; then
+#     echo "GCC is unset";
+# else
+#     echo "GCC is $GCC"
+#     export GCC=$(which $GCC)
+#     echo "GCC after which is $GCC"
 
-    echo "#!/bin/bash" > $GCC-shim
-    echo "set -e -o pipefail -x " >> $GCC-shim
-    echo "$GCC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GCC-shim
-    chmod u+x $GCC-shim
-    export GCC=$GCC-shim
-    echo "GCC after shim is $GCC"
-fi
+#     echo "#!/bin/bash" > $GCC-shim
+#     echo "set -e -o pipefail -x " >> $GCC-shim
+#     echo "$GCC -I$PREFIX/include -L$PREFIX/lib -pthread -fPIC \"\$@\"" >> $GCC-shim
+#     chmod u+x $GCC-shim
+#     export GCC=$GCC-shim
+#     echo "GCC after shim is $GCC"
+# fi
 
-if [ -z ${LD+x} ]; then
-    echo "LD is unset";
-else
-    echo "LD is $LD"
-    export LD=$(which $LD)
-    echo "LD after which is $LD"
+# if [ -z ${LD+x} ]; then
+#     echo "LD is unset";
+# else
+#     echo "LD is $LD"
+#     export LD=$(which $LD)
+#     echo "LD after which is $LD"
 
-    echo "#!/bin/bash" > $LD-shim
-    echo "set -e -o pipefail -x " >> $LD-shim
-    echo "$LD -L$PREFIX/lib \"\$@\"" >> $LD-shim
-    chmod u+x $LD-shim
-    export LD=$LD-shim
-    echo "LD after shim is $LD"
+#     echo "#!/bin/bash" > $LD-shim
+#     echo "set -e -o pipefail -x " >> $LD-shim
+#     echo "$LD -L$PREFIX/lib \"\$@\"" >> $LD-shim
+#     chmod u+x $LD-shim
+#     export LD=$LD-shim
+#     echo "LD after shim is $LD"
 
-    echo "#!/bin/bash" > ${LD}.gold
-    echo "set -e -o pipefail -x " >> ${LD}.gold
-    echo "$LD_GOLD -L$PREFIX/lib \"\$@\"" >> ${LD}.gold
-    chmod u+x ${LD}.gold
-    export LD_GOLD=${LD}.gold
-    echo "LD_GOLD after shim is ${LD_GOLD}"
-fi
+#     echo "#!/bin/bash" > ${LD}.gold
+#     echo "set -e -o pipefail -x " >> ${LD}.gold
+#     echo "$LD_GOLD -L$PREFIX/lib \"\$@\"" >> ${LD}.gold
+#     chmod u+x ${LD}.gold
+#     export LD_GOLD=${LD}.gold
+#     echo "LD_GOLD after shim is ${LD_GOLD}"
+# fi
 
 #
 # Hack: ensure that the correct libpthread is used.
@@ -89,24 +93,24 @@ fi
 # Install bootstrap ghc
 #######################################################################################################
 
-mv ${SRC_DIR}/ghc_stk/stack ${BUILD_PREFIX}/bin/
-chmod u+x ${BUILD_PREFIX}/bin/stack
-which stack
-stack --version
+# mv ${SRC_DIR}/ghc_stk/stack ${BUILD_PREFIX}/bin/
+# chmod u+x ${BUILD_PREFIX}/bin/stack
+# which stack
+# stack --version
 
-export GHC_BOOTSTRAP_PREFIX=${SRC_DIR}/ghc_bootstrap_pfx
-mkdir -p $GHC_BOOTSTRAP_PREFIX/bin
-export PATH=$PATH:${GHC_BOOTSTRAP_PREFIX}/bin
+# export GHC_BOOTSTRAP_PREFIX=${SRC_DIR}/ghc_bootstrap_pfx
+# mkdir -p $GHC_BOOTSTRAP_PREFIX/bin
+# export PATH=$PATH:${GHC_BOOTSTRAP_PREFIX}/bin
 
-pushd ${SRC_DIR}/ghc_bootstrap
-echo AAAAAAAAAAAAAAAABOUT to run configure
-pwd
-ls -l
-./configure --prefix=${GHC_BOOTSTRAP_PREFIX} --with-gmp-includes=$PREFIX/include --with-gmp-libraries=$PREFIX/lib || cat config.log
-make install
-ghc-pkg recache
+# pushd ${SRC_DIR}/ghc_bootstrap
+# echo AAAAAAAAAAAAAAAABOUT to run configure
+# pwd
+# ls -l
+# ./configure --prefix=${GHC_BOOTSTRAP_PREFIX} --with-gmp-includes=$PREFIX/include --with-gmp-libraries=$PREFIX/lib || cat config.log
+# make install
+# ghc-pkg recache
 
-popd
+# popd
 
 #which cabal
 #cabal update
@@ -151,7 +155,7 @@ mkdir -p $STACK_ROOT
     echo "ghc-options:"
     echo "  \"\$everything\": -optc-I${PREFIX}/include -optl-L${PREFIX}/lib"
     echo "apply-ghc-options: everything"
-    echo "system-ghc: true"
+    echo "system-ghc: false"
 ) > "${STACK_ROOT}/config.yaml"
 
 stack setup
