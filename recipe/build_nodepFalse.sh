@@ -115,10 +115,8 @@ mkdir -p $STACK_ROOT
 ) > "${STACK_ROOT}/config.yaml"
 
 echo "BEFORE RUNNING STACK: PATH IS ${PATH} STACK_ROOT IS ${STACK_ROOT}"
-OUR_STACK_OPTS=" --verbose --system-ghc --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib "
-stack "${OUR_STACK_OPTS}" setup
-stack "${OUR_STACK_OPTS}" update
-stack "${OUR_STACK_OPTS}" install --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin --flag git-annex:magicmime --flag git-annex:dbus
+stack --verbose --system-ghc --extra-include-dirs "${PREFIX}/include" --extra-lib-dirs "${PREFIX}/lib" setup
+stack --verbose --system-ghc --extra-include-dirs "${PREFIX}/include" --extra-lib-dirs "${PREFIX}/lib" update
+stack --verbose --system-ghc --extra-include-dirs "${PREFIX}/include" --extra-lib-dirs "${PREFIX}/lib" install --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin --flag git-annex:magicmime --flag git-annex:dbus
 ln -s ${PREFIX}/bin/git-annex ${PREFIX}/bin/git-annex-shell
 popd
-
