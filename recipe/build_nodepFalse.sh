@@ -114,10 +114,11 @@ mkdir -p $STACK_ROOT
     echo "system-ghc: true"
 ) > "${STACK_ROOT}/config.yaml"
 
-stack setup
-stack update
-echo "BEFORE RUNNING STACK: PATH IS $PATH"
-stack --verbose --system-ghc --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib install --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin --flag git-annex:magicmime --flag git-annex:dbus
+echo "BEFORE RUNNING STACK: PATH IS ${PATH} STACK_ROOT IS ${STACK_ROOT}"
+OUR_STACK_OPTS=" --verbose --system-ghc --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib "
+stack "${OUR_STACK_OPTS}" setup
+stack "${OUR_STACK_OPTS}" update
+stack "${OUR_STACK_OPTS}" install --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin --flag git-annex:magicmime --flag git-annex:dbus
 ln -s ${PREFIX}/bin/git-annex ${PREFIX}/bin/git-annex-shell
 popd
 
