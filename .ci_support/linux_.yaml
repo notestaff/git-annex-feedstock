@@ -55,8 +55,6 @@ pin_run_as_build:
     max_pin: x.x
 sqlite:
 - '3'
-v7:
-- 'False'
 xz:
 - '5.2'
 zlib:
