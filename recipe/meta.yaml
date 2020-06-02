@@ -37,8 +37,8 @@ source:
   - url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
     folder: git_annex_main
-    patches:
-      - 0001-new-patch-to-add-fdo-notify-and-magic.patch
+#    patches:
+#      - 0001-new-patch-to-add-fdo-notify-and-magic.patch
 
   - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-centos67-linux.tar.xz  # [linux]
     sha256: {{ ghc_bootstrap_linux_sha256 }}  # [linux]
@@ -112,7 +112,7 @@ test:
 
 about:
   home: http://git-annex.branchable.com
-  license: AGPL-3.0
+  license: AGPL-3.0-only
   license_family: AGPL
   license_file: LICENSE
   summary: A tool for managing large files with git
