@@ -71,6 +71,7 @@ requirements:
     - binutils
     - pkg-config
     - xz
+    - make
     - automake
     - autoconf
     - libtool

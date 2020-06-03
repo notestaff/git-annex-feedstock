@@ -85,11 +85,32 @@ echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-incl
 echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-libraries=$PREFIX/lib" >> mk/build.mk
 echo "STRIP_CMD = $STRIP" >> build.mk
 
+echo "========CHECKING FREE SPACE GLOBALLY==========="
+df
+
 echo "========CHECKING FREE SPACE==========="
 df .
 
 ./boot
 ./configure --prefix=${BUILD_PREFIX}  --with-gmp-includes=$PREFIX/include --with-gmp-libraries=$PREFIX/lib --with-system-libffi
+
+set +e
+echo "========BUILING GHC-STAGE1 FROM SOURCE, multi-cpu==========="
+df .
+make -j${CPU_COUNT} inplace/bin/ghc-stage1
+df .
+echo "========DONE BUILING GHC-STAGE1 FROM SOURCE, multi-cpu==========="
+set -e
+echo "========BUILING GHC-STAGE1 FROM SOURCE, one-cpu==========="
+df .
+make inplace/bin/ghc-stage1
+df .
+echo "========DONE BUILING GHC-STAGE1 FROM SOURCE, one-cpu==========="
+
+echo "========SPACE USAGE AFTER STAGE1================"
+du | sort -rn
+echo "========DONE SPACE USAGE AFTER STAGE1================"
+
 set +e
 echo "========BUILING GHC FROM SOURCE, multi-cpu==========="
 df .
