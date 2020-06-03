@@ -76,24 +76,47 @@ popd
 # Build recent ghc from source
 #######################################################################################################
 
-pushd ${SRC_DIR}/ghc_src
+# pushd ${SRC_DIR}/ghc_src
 
-touch mk/build.mk
-echo "HADDOCK_DOCS = NO" >> mk/build.mk
-echo "BuildFlavour = quick" >> mk/build.mk
-echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-includes=$PREFIX/include" >> mk/build.mk
-echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-libraries=$PREFIX/lib" >> mk/build.mk
-echo "STRIP_CMD = $STRIP" >> build.mk
+# touch mk/build.mk
+# echo "HADDOCK_DOCS = NO" >> mk/build.mk
+# echo "BuildFlavour = quick" >> mk/build.mk
+# echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-includes=$PREFIX/include" >> mk/build.mk
+# echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-libraries=$PREFIX/lib" >> mk/build.mk
+# echo "STRIP_CMD = $STRIP" >> build.mk
 
-./boot
-./configure --prefix=${BUILD_PREFIX}  --with-gmp-includes=$PREFIX/include --with-gmp-libraries=$PREFIX/lib --with-system-libffi
-set +e
-make -j${CPU_COUNT}
-set -e
-make
-make install
-ghc-pkg recache
-popd
+# echo "========CHECKING FREE SPACE==========="
+# df .
+
+# ./boot
+# ./configure --prefix=${BUILD_PREFIX}  --with-gmp-includes=$PREFIX/include --with-gmp-libraries=$PREFIX/lib --with-system-libffi
+# set +e
+# echo "========BUILING GHC FROM SOURCE, multi-cpu==========="
+# df .
+# make -j${CPU_COUNT}
+# df .
+# echo "========DONE BUILING GHC FROM SOURCE, multi-cpu==========="
+# set -e
+# echo "========BUILING GHC FROM SOURCE, one-cpu==========="
+# df .
+# make
+# df .
+# echo "========DONE BUILING GHC FROM SOURCE, one-cpu==========="
+# echo "========INSTALLING GHC==========="
+# df .
+# make install
+# df .
+# echo "========CLEANING GHC==========="
+# make clean
+# df .
+# echo "========RECACHING==========="
+# ghc-pkg recache
+# echo "========DONE RECACHING==========="
+# df .
+# echo "========SPACE USAGE AFTER RECACHING==========="
+# pwd
+# du -hs .
+# popd
 
 #######################################################################################################
 # Build git-annex
@@ -111,11 +134,13 @@ mkdir -p $STACK_ROOT
     echo "ghc-options:"
     echo "  \"\$everything\": -optc-I${PREFIX}/include -optl-L${PREFIX}/lib"
     echo "apply-ghc-options: everything"
-    echo "system-ghc: true"
+    echo "compiler: ghc-git-92b6a0237e0195cee4773de4b237951addd659d9-quick"
+#    echo "system-ghc: true"
 ) > "${STACK_ROOT}/config.yaml"
 
-stack setup
-stack update
-stack install --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin --flag git-annex:magicmime --flag git-annex:dbus
+stack setup --compiler ghc-git-92b6a0237e0195cee4773de4b237951addd659d9-quick
+stack update --compiler ghc-git-92b6a0237e0195cee4773de4b237951addd659d9-quick
+stack install --compiler ghc-git-92b6a0237e0195cee4773de4b237951addd659d9-quick --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin # --flag git-annex:magicmime --flag git-annex:dbus
 ln -s ${PREFIX}/bin/git-annex ${PREFIX}/bin/git-annex-shell
 popd
+

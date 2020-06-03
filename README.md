@@ -3,7 +3,7 @@ About git-annex
 
 Home: http://git-annex.branchable.com
 
-Package license: AGPL-3.0
+Package license: AGPL-3.0-only
 
 Feedstock license: BSD 3-Clause
 
@@ -33,17 +33,10 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_v7False</td>
+              <td>linux</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5002&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/git-annex-feedstock?branchName=master&jobName=linux&configuration=linux_v7False" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_v7True</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5002&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/git-annex-feedstock?branchName=master&jobName=linux&configuration=linux_v7True" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/git-annex-feedstock?branchName=master&jobName=linux&configuration=linux_" alt="variant">
                 </a>
               </td>
             </tr>
