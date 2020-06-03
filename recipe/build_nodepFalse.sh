@@ -113,6 +113,9 @@ echo "========RECACHING==========="
 ghc-pkg recache
 echo "========DONE RECACHING==========="
 df .
+echo "========SPACE USAGE AFTER RECACHING==========="
+pwd
+du -hs .
 popd
 
 #######################################################################################################

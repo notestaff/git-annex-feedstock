@@ -58,7 +58,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - stack <1.9.3
+    - stack
     - perl
     - coreutils
     - binutils
