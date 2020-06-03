@@ -85,14 +85,34 @@ echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-incl
 echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-libraries=$PREFIX/lib" >> mk/build.mk
 echo "STRIP_CMD = $STRIP" >> build.mk
 
+echo "========CHECKING FREE SPACE==========="
+df .
+
 ./boot
 ./configure --prefix=${BUILD_PREFIX}  --with-gmp-includes=$PREFIX/include --with-gmp-libraries=$PREFIX/lib --with-system-libffi
 set +e
+echo "========BUILING GHC FROM SOURCE, multi-cpu==========="
+df .
 make -j${CPU_COUNT}
+df .
+echo "========DONE BUILING GHC FROM SOURCE, multi-cpu==========="
 set -e
+echo "========BUILING GHC FROM SOURCE, one-cpu==========="
+df .
 make
+df .
+echo "========DONE BUILING GHC FROM SOURCE, one-cpu==========="
+echo "========INSTALLING GHC==========="
+df .
 make install
+df .
+echo "========CLEANING GHC==========="
+make clean
+df .
+echo "========RECACHING==========="
 ghc-pkg recache
+echo "========DONE RECACHING==========="
+df .
 popd
 
 #######################################################################################################
