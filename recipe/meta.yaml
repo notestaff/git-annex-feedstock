@@ -25,8 +25,10 @@
 
 {% set ghc_src_version = "8.6.5" %}
 {% set ghc_src_sha256 = "4d4aa1e96f4001b934ac6193ab09af5d6172f41f5a5d39d8e43393b9aafee361" %}
+{% set stack_version = "2.3.1" %}
 {% set ghc_bootstrap_version = "8.4.2" %}
 {% set ghc_bootstrap_linux_sha256 = "28c31489ed9a83af4400685ec8bc72a6d43d08958d75b2dc35d29a894a5c9d93" %}
+{% set stack_sha256 = "4bae8830b2614dddf3638a6d1a7bbbc3a5a833d05b2128eae37467841ac30e47" %}
 
 package:
   name: {{ name }}
@@ -42,11 +44,16 @@ source:
 
   - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-centos67-linux.tar.xz  # [linux]
     sha256: {{ ghc_bootstrap_linux_sha256 }}  # [linux]
-    folder: ghc_bootstrap
+    folder: ghc_bootstrap  # [linux]
 
   - url: https://downloads.haskell.org/~ghc/{{ ghc_src_version }}/ghc-{{ ghc_src_version }}-src.tar.xz
     sha256: {{ ghc_src_sha256 }}
     folder: ghc_src
+
+  - url: https://github.com/commercialhaskell/stack/releases/download/v{{ stack_version }}/stack-{{ stack_version }}-linux-x86_64-static.tar.gz  # linux
+    sha256: {{ stack_sha256 }}  # [linux]
+    fn: stack-{{ stack_version }}-linux-x86_64.tar.gz  # [linux]
+    folder: stack_bin
 
 build:
   number: {{ build }}
@@ -58,7 +65,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - stack
+#    - stack
     - perl
     - coreutils
     - binutils

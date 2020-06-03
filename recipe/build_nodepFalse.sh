@@ -122,6 +122,16 @@ popd
 # Build git-annex
 #######################################################################################################
 
+echo "========INSTALLING STACK==========="
+pushd ${SRC_DIR}/stack_bin
+mv stack ${BUILD_PREFIX}/bin
+chmod u+x ${BUILD_PREFIX}/bin/stack
+popd
+echo $PATH
+which stack
+stack --version
+echo "========DONE INSTALLING STACK==========="
+
 pushd ${SRC_DIR}/git_annex_main
 
 export STACK_ROOT=${SRC_DIR}/stack_root
@@ -137,9 +147,10 @@ mkdir -p $STACK_ROOT
     echo "system-ghc: true"
 ) > "${STACK_ROOT}/config.yaml"
 
-stack setup --system-ghc
-stack update --system-ghc
-stack install --system-ghc --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin # --flag git-annex:magicmime --flag git-annex:dbus
+echo $PATH
+stack -v --system-ghc setup 
+stack -v --system-ghc path
+stack -v --system-ghc update 
+stack -v --system-ghc install --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin # --flag git-annex:magicmime --flag git-annex:dbus
 ln -s ${PREFIX}/bin/git-annex ${PREFIX}/bin/git-annex-shell
 popd
-
