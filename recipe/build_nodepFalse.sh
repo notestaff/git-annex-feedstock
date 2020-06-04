@@ -79,20 +79,64 @@ popd
 pushd ${SRC_DIR}/ghc_src
 
 touch mk/build.mk
-echo "HADDOCK_DOCS = NO" >> mk/build.mk
+#echo "HADDOCK_DOCS = NO" >> mk/build.mk
 echo "BuildFlavour = quick" >> mk/build.mk
 echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-includes=$PREFIX/include" >> mk/build.mk
 echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-libraries=$PREFIX/lib" >> mk/build.mk
 echo "STRIP_CMD = $STRIP" >> build.mk
 
+echo "========CHECKING FREE SPACE GLOBALLY==========="
+df
+
+echo "========CHECKING FREE SPACE==========="
+df .
+
 ./boot
 ./configure --prefix=${BUILD_PREFIX}  --with-gmp-includes=$PREFIX/include --with-gmp-libraries=$PREFIX/lib --with-system-libffi
+
 set +e
-make -j${CPU_COUNT}
+echo "========BUILING GHC-STAGE1 FROM SOURCE, multi-cpu==========="
+df .
+make -j${CPU_COUNT} inplace/bin/ghc-stage1
+df .
+echo "========DONE BUILING GHC-STAGE1 FROM SOURCE, multi-cpu==========="
 set -e
+echo "========BUILING GHC-STAGE1 FROM SOURCE, one-cpu==========="
+df .
+make inplace/bin/ghc-stage1
+df .
+echo "========DONE BUILING GHC-STAGE1 FROM SOURCE, one-cpu==========="
+
+echo "========SPACE USAGE AFTER STAGE1================"
+du | sort -rn
+echo "========DONE SPACE USAGE AFTER STAGE1================"
+
+set +e
+echo "========BUILING GHC FROM SOURCE, multi-cpu==========="
+df .
+make -j${CPU_COUNT}
+df .
+echo "========DONE BUILING GHC FROM SOURCE, multi-cpu==========="
+set -e
+echo "========BUILING GHC FROM SOURCE, one-cpu==========="
+df .
 make
+df .
+echo "========DONE BUILING GHC FROM SOURCE, one-cpu==========="
+echo "========INSTALLING GHC==========="
+df .
 make install
+df .
+echo "========CLEANING GHC==========="
+make clean
+df .
+echo "========RECACHING==========="
 ghc-pkg recache
+echo "========DONE RECACHING==========="
+df .
+echo "========SPACE USAGE AFTER RECACHING==========="
+pwd
+du -hs .
 popd
 
 #######################################################################################################
@@ -110,12 +154,23 @@ mkdir -p $STACK_ROOT
     echo "- ${PREFIX}/lib"
     echo "ghc-options:"
     echo "  \"\$everything\": -optc-I${PREFIX}/include -optl-L${PREFIX}/lib"
-    echo "apply-ghc-options: everything"
+#    echo "apply-ghc-options: everything"
     echo "system-ghc: true"
 ) > "${STACK_ROOT}/config.yaml"
 
-stack setup
-stack update
-stack install --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin --flag git-annex:magicmime --flag git-annex:dbus
+echo $PATH
+echo "========CALLING STACK SETUP==========="
+stack -v --system-ghc setup 
+echo "========CALLING STACK PATH==========="
+stack -v --system-ghc path
+echo "========CALLING STACK UPDATE==========="
+stack -v --system-ghc update 
+echo "========CALLING STACK BUILD NETWORK==========="
+stack -v --system-ghc build --cabal-verbose --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin network-2.8.0.1
+echo "========CALLING STACK BUILD==========="
+stack -v --system-ghc install --cabal-verbose --extra-include-dirs ${PREFIX}/include --extra-lib-dirs ${PREFIX}/lib --ghc-options " -optc-I${PREFIX}/include -optl-L${PREFIX}/lib " --local-bin-path ${PREFIX}/bin
+# --flag git-annex:magicmime --flag git-annex:dbus
 ln -s ${PREFIX}/bin/git-annex ${PREFIX}/bin/git-annex-shell
+echo "========CALLING STACK INSTALL==========="
+#make install BUILDER=stack PREFIX=${PREFIX}
 popd

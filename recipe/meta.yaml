@@ -1,8 +1,6 @@
 {% set name = "git-annex" %}
-{% set version = "7.20200309" %}  # [v7]
-{% set version = "8.20200309" %}  # [not v7]
-{% set sha256 = "c04d361415f273a076ab59fbc5c1a860835ab0b5732d44027fe6695eecf2e3da" %}  # [not nodep and v7]
-{% set sha256 = "e5868490fc710b0df4e1960a544dbd6cde55bb8f04624bc8c38ce50265004bfa" %}  # [not nodep and not v7]
+{% set version = "8.20200522" %}
+{% set sha256 = "a81fd3c09126b740e586507b9327ab59f09753ea57a17509b641b29a6699e1ec" %}  # [not nodep]
 {% set sha256 = "d7d22864ecff78db2087ac2560c3c900f7ed88413359426f1e85c4f51a7de494" %}  # [nodep]
 
 {% set nodep = True %}  # [nodep]
@@ -39,13 +37,12 @@ source:
   - url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
     folder: git_annex_main
-    patches:
-      - 0001-added-extra-deps-for-fdo-notify-and-magic.patch  # [v7]
-      - 0001-new-patch-to-add-fdo-notify-and-magic.patch  # [not v7]
+#    patches:
+#      - 0001-new-patch-to-add-fdo-notify-and-magic.patch
 
   - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-centos67-linux.tar.xz  # [linux]
     sha256: {{ ghc_bootstrap_linux_sha256 }}  # [linux]
-    folder: ghc_bootstrap
+    folder: ghc_bootstrap  # [linux]
 
   - url: https://downloads.haskell.org/~ghc/{{ ghc_src_version }}/ghc-{{ ghc_src_version }}-src.tar.xz
     sha256: {{ ghc_src_sha256 }}
@@ -61,12 +58,13 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - stack >=1.9.3
+    - stack
     - perl
     - coreutils
     - binutils
     - pkg-config
     - xz
+    - make
     - automake
     - autoconf
     - libtool
@@ -115,7 +113,7 @@ test:
 
 about:
   home: http://git-annex.branchable.com
-  license: AGPL-3.0
+  license: AGPL-3.0-only
   license_family: AGPL
   license_file: LICENSE
   summary: A tool for managing large files with git
