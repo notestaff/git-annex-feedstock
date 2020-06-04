@@ -79,7 +79,7 @@ popd
 pushd ${SRC_DIR}/ghc_src
 
 touch mk/build.mk
-echo "HADDOCK_DOCS = NO" >> mk/build.mk
+#echo "HADDOCK_DOCS = NO" >> mk/build.mk
 echo "BuildFlavour = quick" >> mk/build.mk
 echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-includes=$PREFIX/include" >> mk/build.mk
 echo "libraries/integer-gmp_CONFIGURE_OPTS += --configure-option=--with-gmp-libraries=$PREFIX/lib" >> mk/build.mk
