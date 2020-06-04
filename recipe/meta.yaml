@@ -6,7 +6,7 @@
 {% set nodep = True %}  # [nodep]
 {% set nodep = False %}  # [not nodep]
 
-{% set build = 0 %}
+{% set build = 1 %}
 # prioritize non-nodep variant via build number
 {% if not nodep %}
 {% set build = build + 100 %}
@@ -37,8 +37,8 @@ source:
   - url: https://hackage.haskell.org/package/{{ name }}-{{ version }}/{{ name }}-{{ version }}.tar.gz
     sha256: {{ sha256 }}
     folder: git_annex_main
-#    patches:
-#      - 0001-new-patch-to-add-fdo-notify-and-magic.patch
+    patches:
+      - 0001-new-patch-to-add-fdo-notify-and-magic.patch
 
   - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-centos67-linux.tar.xz  # [linux]
     sha256: {{ ghc_bootstrap_linux_sha256 }}  # [linux]
