@@ -109,6 +109,8 @@ build:
   number: {{ build }}
   skip: True  # [not linux]
   string: "nodep_h{{ PKG_HASH }}_{{ build }}"
+  binary_relocation: False
+  detect_binary_files_with_prefix: False
   script: ${RECIPE_DIR}/build_nodepTrue.sh
 {% endif %}
 
