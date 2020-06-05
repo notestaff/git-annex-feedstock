@@ -116,8 +116,10 @@ build:
 
 test:
   commands:
-    - git-annex version
+    - git-annex version | grep -F {{ version }}
     - git-annex test
+  requires:
+    - coreutils
 
 about:
   home: http://git-annex.branchable.com
