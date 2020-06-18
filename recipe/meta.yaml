@@ -96,8 +96,6 @@ requirements:
 source:
   - url: https://downloads.kitenet.net/git-annex/linux/current/git-annex-standalone-amd64.tar.gz
     sha256: {{ sha256 }}
-    patches:
-      - 0001-fix-long-paths-in-locales.patch
 
 build:
   number: {{ build }}
