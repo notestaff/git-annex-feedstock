@@ -1,17 +1,17 @@
-From aa8f24131c9be6c4c9236fe55acf836e762afee9 Mon Sep 17 00:00:00 2001
+From c991e353cb664736821820ae59c6b2e6d078a94e Mon Sep 17 00:00:00 2001
 From: Ilya Shlyakhter <ilya_shl@alum.mit.edu>
-Date: Tue, 21 Jul 2020 01:10:48 -0400
+Date: Tue, 21 Jul 2020 09:41:34 -0400
 Subject: [PATCH] enable magicmime dbus
 
 ---
- stack.yaml | 13 +++++++++----
- 1 file changed, 9 insertions(+), 4 deletions(-)
+ stack.yaml | 15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
 
 diff --git a/stack.yaml b/stack.yaml
-index 23724d6..ed4e94f 100755
+index 23724d6..1fbe2d4 100755
 --- a/stack.yaml
 +++ b/stack.yaml
-@@ -7,18 +7,23 @@ flags:
+@@ -7,25 +7,30 @@ flags:
      webdav: true
      torrentparser: true
      webapp: true
@@ -39,6 +39,14 @@ index 23724d6..ed4e94f 100755
   - bloomfilter-2.0.1.0
   - filepath-bytestring-1.4.2.1.6
   - sandi-0.5
+  - tasty-rerun-1.1.17
+  - torrent-10000.1.1
+  - git-lfs-1.1.0
+- - http-client-restricted-0.0.2
++ - http-client-restricted-0.0.3
+  - http-client-0.5.14
+ explicit-setup-deps:
+   git-annex: true
 -- 
 2.23.3
 
