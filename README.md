@@ -5,7 +5,7 @@ Home: http://git-annex.branchable.com
 
 Package license: AGPL-3.0-only
 
-Feedstock license: BSD 3-Clause
+Feedstock license: BSD-3-Clause
 
 Summary: A tool for managing large files with git
 
