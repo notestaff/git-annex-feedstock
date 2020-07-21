@@ -1,6 +1,6 @@
 {% set name = "git-annex" %}
-{% set version = "8.20200522" %}
-{% set sha256 = "a81fd3c09126b740e586507b9327ab59f09753ea57a17509b641b29a6699e1ec" %}  # [not nodep]
+{% set version = "8.20200720.1" %}
+{% set sha256 = "d6252697151ab01cc8f7a492dc5eb4b4e773c0d48771df360c82a7cca7a39c3c" %}  # [not nodep]
 {% set sha256 = "d7d22864ecff78db2087ac2560c3c900f7ed88413359426f1e85c4f51a7de494" %}  # [nodep]
 
 {% set nodep = True %}  # [nodep]
