@@ -25,7 +25,7 @@ libiconv:
 libxml2:
 - '2.9'
 ncurses:
-- '6.1'
+- '6.2'
 nodep:
 - 'False'
 perl:
