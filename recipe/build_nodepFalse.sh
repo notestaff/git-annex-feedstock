@@ -69,7 +69,10 @@ pushd ${SRC_DIR}/ghc_bootstrap
 cp ${RECIPE_DIR}/config.guess ${RECIPE_DIR}/config.sub .
 chmod u+x config.guess config.sub
 
-./configure --prefix=${GHC_BOOTSTRAP_PREFIX} --host=x86_64-unknown-linux-gnu --build=x86_64-unknown-linux-gnu
+unset host_alias
+unset build_alias
+
+./configure --prefix=${GHC_BOOTSTRAP_PREFIX}
 make install
 ghc-pkg recache
 
