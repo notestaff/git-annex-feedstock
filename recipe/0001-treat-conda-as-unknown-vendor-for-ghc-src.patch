@@ -1,0 +1,26 @@
+From b7598ce6f404135d95f6927f01c9c2e993c246d7 Mon Sep 17 00:00:00 2001
+From: Ilya Shlyakhter <ilya_shl@alum.mit.edu>
+Date: Tue, 4 Aug 2020 15:48:56 -0400
+Subject: [PATCH] treat conda as unknown vendor for ghc src
+
+---
+ configure | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/configure b/configure
+index 6ac3e72..eab725e 100755
+--- a/configure
++++ b/configure
+@@ -4019,6 +4019,9 @@ case "$target_cpu" in
+   hardfloat) # like armv7a-hardfloat-linux-gnueabi
+     TargetVendor="unknown"
+     ;;
++  conda) # like x86_64-conda-linux-gnu
++    TargetVendor="unknown"
++    ;;
+   *)
+     #pass thru by default
+     TargetVendor="$target_vendor"
+-- 
+2.28.0
+
