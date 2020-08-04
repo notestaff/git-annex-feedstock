@@ -39,6 +39,7 @@ source:
     folder: git_annex_main
     patches:
       - 0001-enable-magicmime-dbus.patch
+      - 0001-treat-conda-as-unknown-vendor.patch
 
   - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-centos67-linux.tar.xz  # [linux]
     sha256: {{ ghc_bootstrap_linux_sha256 }}  # [linux]
