@@ -114,12 +114,9 @@ build:
   skip: True  # [not linux]
   string: "nodep_h{{ PKG_HASH }}_{{ build }}"
   script: ${RECIPE_DIR}/build_nodepTrue.sh
+  ignore_prefix_files: True
+  detect_binary_files_with_prefix: False
 {% endif %}
-
-test:
-  commands:
-    - git-annex version
-    - git-annex test
 
 about:
   home: https://git-annex.branchable.com
