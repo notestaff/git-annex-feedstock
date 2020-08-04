@@ -57,6 +57,9 @@ if [[ -f "${HOST_LIBPTHREAD}" ]]; then
     ln -s /lib64/libpthread.so.0 ${HOST_LIBPTHREAD}
 fi
 
+unset host_alias
+unset build_alias
+
 #######################################################################################################
 # Install bootstrap ghc
 #######################################################################################################
@@ -69,7 +72,6 @@ pushd ${SRC_DIR}/ghc_bootstrap
 ./configure --prefix=${GHC_BOOTSTRAP_PREFIX}
 make install
 ghc-pkg recache
-
 popd
 
 #######################################################################################################
