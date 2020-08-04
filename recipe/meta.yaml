@@ -25,9 +25,8 @@
 
 {% set ghc_src_version = "8.6.5" %}
 {% set ghc_src_sha256 = "4d4aa1e96f4001b934ac6193ab09af5d6172f41f5a5d39d8e43393b9aafee361" %}
-{% set ghc_bootstrap_version = "8.6.5" %}
-{% set ghc_bootstrap_linux_sha256 = "80ab566f4411299f9e5922d60749ca80f989d697db19e03ed875619d699f0edf" %}
-#{% set ghc_bootstrap_linux_sha256 = "28c31489ed9a83af4400685ec8bc72a6d43d08958d75b2dc35d29a894a5c9d93" %}
+{% set ghc_bootstrap_version = "8.4.2" %}
+{% set ghc_bootstrap_linux_sha256 = "28c31489ed9a83af4400685ec8bc72a6d43d08958d75b2dc35d29a894a5c9d93" %}
 
 package:
   name: {{ name }}
@@ -41,7 +40,7 @@ source:
     patches:
       - 0001-enable-magicmime-dbus.patch
 
-  - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-centos7-linux.tar.xz  # [linux]
+  - url: https://downloads.haskell.org/~ghc/{{ ghc_bootstrap_version }}/ghc-{{ ghc_bootstrap_version }}-x86_64-centos67-linux.tar.xz  # [linux]
     sha256: {{ ghc_bootstrap_linux_sha256 }}  # [linux]
     folder: ghc_bootstrap  # [linux]
 
