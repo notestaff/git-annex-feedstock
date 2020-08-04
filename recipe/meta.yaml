@@ -1,12 +1,23 @@
 {% set name = "git-annex" %}
-{% set version = "8.20200720.1" %}
+
+#
+# This recipe builds two variants of the git-annex conda package: the standard one, and a "nodep" (no-dependencies) one.
+# The nodep package installs the standalone version of git-annex ( https://git-annex.branchable.com/install/Linux_standalone/ ),
+# which has no dependencies; it can be used to install git-annex into conda environments that include packages which conflict
+# with some dependencies of git-annex.  The standard (non-nodep) version is preferred; the nodep version should only be used
+# in case of unresolvable dependency conflicts.
+#
+
+{% set version = "8.20200720.1" %}  # [not nodep]
+{% set version = "8.20200618" %}  # [nodep]
 {% set sha256 = "d6252697151ab01cc8f7a492dc5eb4b4e773c0d48771df360c82a7cca7a39c3c" %}  # [not nodep]
-{% set sha256 = "d7d22864ecff78db2087ac2560c3c900f7ed88413359426f1e85c4f51a7de494" %}  # [nodep]
+{% set sha256 = "31525511e3aecfd77a0425f0c3ae3f52194e841288300ab04f2e60406619d225" %}  # [nodep]
+{% set size = "54746876" %}  # [nodep]
 
 {% set nodep = True %}  # [nodep]
 {% set nodep = False %}  # [not nodep]
 
-{% set build = 0 %}
+{% set build = 1 %}
 # prioritize non-nodep variant via build number
 {% if not nodep %}
 {% set build = build + 100 %}
@@ -94,7 +105,7 @@ requirements:
 
 {% if nodep %}
 source:
-  - url: https://downloads.kitenet.net/git-annex/linux/current/git-annex-standalone-amd64.tar.gz
+  - url: http://archive.org/download/git-annex-builds/SHA256E-s{{ size }}--{{ sha256 }}.tar.gz
     sha256: {{ sha256 }}
 
 build:
@@ -106,7 +117,7 @@ build:
 
 test:
   commands:
-    - git-annex version
+    - git-annex version | grep {{ version }}
     - git-annex test
 
 about:
