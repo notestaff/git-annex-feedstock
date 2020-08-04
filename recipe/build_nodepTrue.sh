@@ -11,3 +11,8 @@ mkdir -p $PACKAGE_HOME
 mv * ${PACKAGE_HOME}/
 ln -s ${PACKAGE_HOME}/git-annex $PREFIX/bin/
 ln -s ${PACKAGE_HOME}/git-annex-shell $PREFIX/bin/
+
+echo $PATH
+which git-annex
+git-annex version
+

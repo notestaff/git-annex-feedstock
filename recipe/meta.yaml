@@ -117,7 +117,7 @@ build:
 
 test:
   commands:
-    - git-annex version | grep {{ version }}
+    - git-annex version
     - git-annex test
 
 about:
