@@ -9,10 +9,10 @@
 #
 
 {% set version = "8.20200720.1" %}  # [not nodep]
-{% set version = "8.20200720.2.g465842f3f" %}  # [nodep]
+{% set version = "8.20200618" %}  # [nodep]
 {% set sha256 = "d6252697151ab01cc8f7a492dc5eb4b4e773c0d48771df360c82a7cca7a39c3c" %}  # [not nodep]
-{% set sha256 = "787ad28d7a5aac534aefb80269b556c2db854c8321e5c2ed5cd4beb932a3aafd" %}  # [nodep]
-{% set size = "55090323" %}  # [nodep]
+{% set sha256 = "31525511e3aecfd77a0425f0c3ae3f52194e841288300ab04f2e60406619d225" %}  # [nodep]
+{% set size = "54746876" %}  # [nodep]
 
 {% set nodep = True %}  # [nodep]
 {% set nodep = False %}  # [not nodep]
@@ -105,8 +105,8 @@ requirements:
 
 {% if nodep %}
 source:
-#  - url: http://archive.org/download/git-annex-builds/SHA256E-s{{ size }}--{{ sha256 }}.tar.gz
-  - url: https://downloads.kitenet.net/git-annex/autobuild/amd64/git-annex-standalone-amd64.tar.gz 
+  - url: http://archive.org/download/git-annex-builds/SHA256E-s{{ size }}--{{ sha256 }}.tar.gz
+#  - url: https://downloads.kitenet.net/git-annex/autobuild/amd64/git-annex-standalone-amd64.tar.gz 
     sha256: {{ sha256 }}
 
 build:
@@ -118,6 +118,11 @@ build:
   detect_binary_files_with_prefix: False
   binary_relocation: False
 {% endif %}
+
+test:
+  commands:
+    - git-annex version | grep {{ version }}
+    - git-annex test
 
 about:
   home: https://git-annex.branchable.com
