@@ -116,6 +116,7 @@ build:
   script: ${RECIPE_DIR}/build_nodepTrue.sh
   ignore_prefix_files: True
   detect_binary_files_with_prefix: False
+  binary_relocation: False
 {% endif %}
 
 about:
