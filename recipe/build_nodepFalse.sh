@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#
+# Script: build_nodepFalse.sh
+#
+# Builds the standard (not no-dependencies) git-annex package.
+#
+
 set -e -o pipefail -x
 
 #######################################################################################################
@@ -16,7 +22,7 @@ export GMP_INCLUDE_DIRS=$PREFIX/include
 export GMP_LIB_DIRS=$PREFIX/lib
 
 #
-# Install shim scripts to ensure that certain flags are always passed to the compiler/linker
+# Hack: install shim scripts to ensure that certain flags are always passed to the compiler/linker
 #
 
 echo "#!/bin/bash" > $CC-shim
@@ -57,6 +63,16 @@ if [[ -f "${HOST_LIBPTHREAD}" ]]; then
     ln -s /lib64/libpthread.so.0 ${HOST_LIBPTHREAD}
 fi
 
+#
+# Ensure that GHC build platform is x86_64-unknown-linux (which GHC knows how to target),
+# rather than x86_64-conda-linux (which GHC does not know about).
+# Suggested by @isuruf on github; see
+# https://github.com/conda-forge/git-annex-feedstock/pull/96/commits/796678ac2cc106e67c4f1f89fb2e92c2ff153616 and
+# https://github.com/conda-forge/git-annex-feedstock/runs/945996913
+#
+unset host_alias
+unset build_alias
+
 #######################################################################################################
 # Install bootstrap ghc
 #######################################################################################################
@@ -69,7 +85,6 @@ pushd ${SRC_DIR}/ghc_bootstrap
 ./configure --prefix=${GHC_BOOTSTRAP_PREFIX}
 make install
 ghc-pkg recache
-
 popd
 
 #######################################################################################################
