@@ -11,8 +11,8 @@
 {% set version = "8.20200810" %}  # [not nodep]
 {% set version = "8.20200810" %}  # [nodep]
 {% set sha256 = "e631c9d52e440f80e9d305c95a078dcae71f200125bca91e49d5b8e2d864c6f3" %}  # [not nodep]
-{% set sha256 = "0be241196d58d848f169c7cfc7094b7dc89d8ca373f86a17e85d5d52848281e7" %}  # [nodep]
-{% set size = "56843093" %}  # [nodep]
+{% set sha256 = "7f41d56041da79110aee971cb9f413a7e9f87baca3f3982c3595d0d8abf382c7" %}  # [nodep]
+{% set size = "55064901" %}  # [nodep]
 
 {% set nodep = True %}  # [nodep]
 {% set nodep = False %}  # [not nodep]
