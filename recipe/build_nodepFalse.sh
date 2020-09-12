@@ -143,7 +143,8 @@ df .
 make install
 df .
 echo "========CLEANING GHC==========="
-make clean
+rm -rf `find . -type d -name testsuite`
+make clean || echo "Error cleaning, ignoring"
 df .
 echo "========RECACHING==========="
 ghc-pkg recache
