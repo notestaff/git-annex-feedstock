@@ -15,8 +15,9 @@ if [ -f "${PACKAGE_HOME}/.standalone-dist-installed" ]; then
 	# or not pass the expected environment to some external programs);           #
 	# the standard distribution should be used when possible.                    #
 	# You can force installation of the standard version by adding =alldep* to   #
-	# the build string, e.g.                                                     #
-	# conda install git-annex=*=alldep*                                          #
+	# the build string of the package specification, e.g.                        #
+	#                                                                            #
+	# conda install -c conda-forge git-annex=*=alldep*                           #
 	#                                                                            #
 	# For more info on the standalone git-annex distribution see                 #
 	# https://git-annex.branchable.com/install/Linux_standalone/                 #
