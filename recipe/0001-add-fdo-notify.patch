@@ -1,0 +1,24 @@
+From 4d4be284064aae0d01968c1ccdb30435f8431f3f Mon Sep 17 00:00:00 2001
+From: Ilya Shlyakhter <Ilya.A.Shlyakhter@questdiagnostics.com>
+Date: Sat, 12 Sep 2020 10:49:38 -0400
+Subject: [PATCH] add fdo-notify
+
+---
+ stack.yaml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/stack.yaml b/stack.yaml
+index b4a866c..f73e89a 100755
+--- a/stack.yaml
++++ b/stack.yaml
+@@ -15,6 +15,7 @@ flags:
+ packages:
+ - '.'
+ extra-deps:
++- fdo-notify-0.3.1
+ - IfElse-0.85
+ - aws-0.22
+ - bloomfilter-2.0.1.0
+-- 
+2.23.0
+
