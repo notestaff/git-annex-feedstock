@@ -73,6 +73,7 @@ requirements:
     - perl
     - coreutils
     - binutils
+    - findutils
     - pkg-config
     - xz
     - make
