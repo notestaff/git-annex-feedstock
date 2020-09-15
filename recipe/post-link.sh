@@ -19,6 +19,10 @@ if [ -f "${PACKAGE_HOME}/.standalone-dist-installed" ]; then
 	#                                                                            #
 	# conda install -c conda-forge git-annex=*=alldep*                           #
 	#                                                                            #
+	# However, this might cause an older git-annex version to be installed,      #
+	# if later versions' dependencies conflict with other packages               #
+	# in the target environment.                                                 #
+	#                                                                            #
 	# For more info on the standalone git-annex distribution see                 #
 	# https://git-annex.branchable.com/install/Linux_standalone/                 #
 	#                                                                            #
