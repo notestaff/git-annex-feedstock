@@ -5,9 +5,13 @@ Home: https://git-annex.branchable.com
 
 Package license: AGPL-3.0-only
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/git-annex-feedstock/blob/master/LICENSE.txt)
 
 Summary: A tool for managing large files with git
+
+Development: http://source.git-annex.branchable.com/?p=source.git;a=summary
+
+Documentation: https://git-annex.branchable.com
 
 git-annex allows managing files with git, without checking the file contents into git.
 It is useful when dealing with files larger than git can currently easily handle.
@@ -33,17 +37,17 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_nodepFalse</td>
+              <td>linux_64_c_compiler_version7cxx_compiler_version7nodepFalse</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5002&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/git-annex-feedstock?branchName=master&jobName=linux&configuration=linux_64_nodepFalse" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/git-annex-feedstock?branchName=master&jobName=linux&configuration=linux_64_c_compiler_version7cxx_compiler_version7nodepFalse" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_nodepTrue</td>
+              <td>linux_64_c_compiler_version7cxx_compiler_version7nodepTrue</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5002&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/git-annex-feedstock?branchName=master&jobName=linux&configuration=linux_64_nodepTrue" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/git-annex-feedstock?branchName=master&jobName=linux&configuration=linux_64_c_compiler_version7cxx_compiler_version7nodepTrue" alt="variant">
                 </a>
               </td>
             </tr>
