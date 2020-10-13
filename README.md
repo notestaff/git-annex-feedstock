@@ -5,9 +5,13 @@ Home: https://git-annex.branchable.com
 
 Package license: AGPL-3.0-only
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/git-annex-feedstock/blob/master/LICENSE.txt)
 
 Summary: A tool for managing large files with git
+
+Development: http://source.git-annex.branchable.com/?p=source.git;a=summary
+
+Documentation: https://git-annex.branchable.com
 
 git-annex allows managing files with git, without checking the file contents into git.
 It is useful when dealing with files larger than git can currently easily handle.

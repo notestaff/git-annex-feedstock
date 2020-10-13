@@ -8,9 +8,9 @@
 # in case of unresolvable dependency conflicts.
 #
 
-{% set version = "8.20200908" %}  # [not nodep]
+{% set version = "8.20201007" %}  # [not nodep]
 {% set version = "8.20200810" %}  # [nodep]
-{% set sha256 = "61719d57d9389716aac9e6e12931e41b3b8a157d5fa8959201953810a88d2384" %}  # [not nodep]
+{% set sha256 = "0af92007388dbb0cbd02dc3d1565b6712bcae56de7089f31dfdff63909f3216c" %}  # [not nodep]
 {% set sha256 = "7f41d56041da79110aee971cb9f413a7e9f87baca3f3982c3595d0d8abf382c7" %}  # [nodep]
 {% set size = "55064901" %}  # [nodep]
 
@@ -34,8 +34,8 @@
 # https://github.com/bioconda/bioconda-recipes/pull/16008
 #
 
-{% set ghc_src_version = "8.8.3" %}
-{% set ghc_src_sha256 = "e0dcc0aaf3e234c5978f29e6df62947e97720ab404ec0158343df211c5480f89" %}
+{% set ghc_src_version = "8.8.4" %}
+{% set ghc_src_sha256 = "f0505e38b2235ff9f1090b51f44d6c8efd371068e5a6bb42a2a6d8b67b5ffc2d" %}
 {% set ghc_bootstrap_version = "8.4.2" %}
 {% set ghc_bootstrap_linux_sha256 = "28c31489ed9a83af4400685ec8bc72a6d43d08958d75b2dc35d29a894a5c9d93" %}
 
