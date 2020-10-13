@@ -34,8 +34,8 @@
 # https://github.com/bioconda/bioconda-recipes/pull/16008
 #
 
-{% set ghc_src_version = "8.8.3" %}
-{% set ghc_src_sha256 = "e0dcc0aaf3e234c5978f29e6df62947e97720ab404ec0158343df211c5480f89" %}
+{% set ghc_src_version = "8.8.4" %}
+{% set ghc_src_sha256 = "f0505e38b2235ff9f1090b51f44d6c8efd371068e5a6bb42a2a6d8b67b5ffc2d" %}
 {% set ghc_bootstrap_version = "8.4.2" %}
 {% set ghc_bootstrap_linux_sha256 = "28c31489ed9a83af4400685ec8bc72a6d43d08958d75b2dc35d29a894a5c9d93" %}
 
