@@ -106,9 +106,11 @@ requirements:
 
 {% if nodep %}
 source:
-  - url: http://archive.org/download/git-annex-builds/SHA256E-s{{ size }}--{{ sha256 }}.tar.gz
+#  - url: http://archive.org/download/git-annex-builds/SHA256E-s{{ size }}--{{ sha256 }}.tar.gz
+    git_url: git://git-annex.branchable.com/
+    git_rev: 8.20201007
 #  - url: https://downloads.kitenet.net/git-annex/autobuild/amd64/git-annex-standalone-amd64.tar.gz 
-    sha256: {{ sha256 }}
+    #sha256: {{ sha256 }}
 
 build:
   number: {{ build }}
@@ -118,6 +120,25 @@ build:
   ignore_prefix_files: True
   detect_binary_files_with_prefix: False
   binary_relocation: False
+
+requirements:
+  build:
+    - stack
+    - perl
+    - coreutils
+    - binutils
+    - findutils
+    - pkg-config
+    - xz
+    - make
+    - automake
+    - autoconf
+    - libtool
+    - bzip2
+    - ncurses
+    - libffi
+    - libxml2
+
 {% endif %}
 
 test:

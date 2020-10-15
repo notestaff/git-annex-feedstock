@@ -8,12 +8,8 @@ jobs:
     vmImage: ubuntu-16.04
   strategy:
     matrix:
-      linux_64_nodepFalse:
-        CONFIG: linux_64_nodepFalse
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: condaforge/linux-anvil-comp7
-      linux_64_nodepTrue:
-        CONFIG: linux_64_nodepTrue
+      linux_64_:
+        CONFIG: linux_64_
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
   timeoutInMinutes: 360

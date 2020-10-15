@@ -19,6 +19,8 @@ PACKAGE_HOME=${PREFIX}/share/${PKG_NAME}-${PKG_VERSION}-${PKG_BUILDNUM}
 
 mkdir -p ${PACKAGE_HOME} ${PREFIX}/bin
 
+docker run hello-world
+
 mv * ${PACKAGE_HOME}/
 ln -s ${PACKAGE_HOME}/git-annex ${PREFIX}/bin/
 ln -s ${PACKAGE_HOME}/git-annex-shell ${PREFIX}/bin/
