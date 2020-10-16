@@ -17,7 +17,7 @@
 {% set nodep = True %}  # [nodep]
 {% set nodep = False %}  # [not nodep]
 
-{% set build = 1 %}
+{% set build = 2 %}
 # prioritize non-nodep variant via build number
 {% if not nodep %}
 {% set build = build + 100 %}
@@ -125,8 +125,8 @@ test:
     - git-annex version | grep {{ version }}
     - git-annex test
   downstreams:
-    - annexremote
-    - datalad=0.13.4  # [not nodep]
+    - annexremote >=1.4.3
+    - datalad >=0.13.4  # [not nodep]
 
 about:
   home: https://git-annex.branchable.com
