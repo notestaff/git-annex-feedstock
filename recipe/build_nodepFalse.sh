@@ -189,4 +189,3 @@ ln -s ${PREFIX}/bin/git-annex ${PREFIX}/bin/git-annex-shell
 echo "========CALLING STACK INSTALL==========="
 #make install BUILDER=stack PREFIX=${PREFIX}
 popd
-
