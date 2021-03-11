@@ -8,17 +8,17 @@
 # in case of unresolvable dependency conflicts.
 #
 
-{% set version = "8.20210127" %}  # [not nodep]
-{% set version = "8.20201104" %}  # [nodep]
-{% set sha256 = "636f439420f28a92a8250b9f8b422567e439315f3f2d23cb0bea3b0a0e5755c3" %}  # [not nodep]
-{% set sha256 = "6860b6136e60ab18c9c380a0153bb2d56ea732dac6277b632cb7b046c9d90c1a" %}  # [nodep]
-{% set size = "50784528" %}  # [nodep]
+{% set version = "8.20210310" %}  # [not nodep]
+{% set version = "8.20210128" %}  # [nodep]
+{% set sha256 = "dd0ae1cac40c97490e0699c68a341b5bff6fcb38e733df83b67c442a7eca97a8" %}  # [not nodep]
+{% set sha256 = "6693f39f79e0e8fdb3ebf5a9b41d5e1af73a2d4e2b86da52215cedd2a69d8cff" %}  # [nodep]
+{% set size = "51232371" %}  # [nodep]
 
 {% set nodep = True %}  # [nodep]
 {% set nodep = False %}  # [not nodep]
 
 {% set build = 0 %}  # [not nodep]
-{% set build = 1 %}  # [nodep]
+{% set build = 0 %}  # [nodep]
 # prioritize non-nodep variant via build number
 {% if not nodep %}
 {% set build = build + 100 %}
@@ -35,8 +35,14 @@
 # https://github.com/bioconda/bioconda-recipes/pull/16008
 #
 
+# ghc_src_version must correspond to the ghc version of the LTS Haskell version specified in the
+# resolver: line in stack.yaml file which is at the root of the git-annex source archive.
+# E.g. for resolver: lts-16.27 the ghc version given at https://www.stackage.org/lts-16.27 is 8.8.4
 {% set ghc_src_version = "8.8.4" %}
 {% set ghc_src_sha256 = "f0505e38b2235ff9f1090b51f44d6c8efd371068e5a6bb42a2a6d8b67b5ffc2d" %}
+# ghc_bootstrap_version must be recent enough to compile ghc_src_version.
+# E.g. for ghc_src_version 8.8.4, the page at https://www.haskell.org/ghc/download_ghc_8_8_4.html#sources
+# says ghc_boostrap_version must be at least 8.4
 {% set ghc_bootstrap_version = "8.4.2" %}
 {% set ghc_bootstrap_linux_sha256 = "28c31489ed9a83af4400685ec8bc72a6d43d08958d75b2dc35d29a894a5c9d93" %}
 
