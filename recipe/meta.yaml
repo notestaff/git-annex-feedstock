@@ -9,16 +9,16 @@
 #
 
 {% set version = "8.20210310" %}  # [not nodep]
-{% set version = "8.20201104" %}  # [nodep]
+{% set version = "8.20210128" %}  # [nodep]
 {% set sha256 = "dd0ae1cac40c97490e0699c68a341b5bff6fcb38e733df83b67c442a7eca97a8" %}  # [not nodep]
-{% set sha256 = "6860b6136e60ab18c9c380a0153bb2d56ea732dac6277b632cb7b046c9d90c1a" %}  # [nodep]
-{% set size = "50784528" %}  # [nodep]
+{% set sha256 = "6693f39f79e0e8fdb3ebf5a9b41d5e1af73a2d4e2b86da52215cedd2a69d8cff" %}  # [nodep]
+{% set size = "51232371" %}  # [nodep]
 
 {% set nodep = True %}  # [nodep]
 {% set nodep = False %}  # [not nodep]
 
 {% set build = 0 %}  # [not nodep]
-{% set build = 1 %}  # [nodep]
+{% set build = 0 %}  # [nodep]
 # prioritize non-nodep variant via build number
 {% if not nodep %}
 {% set build = build + 100 %}
