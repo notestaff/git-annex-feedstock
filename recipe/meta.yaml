@@ -8,9 +8,9 @@
 # in case of unresolvable dependency conflicts.
 #
 
-{% set version = "8.20210310" %}  # [not nodep]
+{% set version = "8.20210330" %}  # [not nodep]
 {% set version = "8.20210224" %}  # [nodep]
-{% set sha256 = "dd0ae1cac40c97490e0699c68a341b5bff6fcb38e733df83b67c442a7eca97a8" %}  # [not nodep]
+{% set sha256 = "17109144b2aadfab79fa0e193df3e0c02fd80f738a5ed6eccb0d11692bedb01d" %}  # [not nodep]
 {% set sha256 = "1e57d2e334cffdb3c3874785cfba4f6d5fc521808d0b1deef4fb68160dd88d48" %}  # [nodep]
 {% set size = "51232145" %}  # [nodep]
 
