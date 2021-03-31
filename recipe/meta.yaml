@@ -1,11 +1,12 @@
 {% set name = "git-annex" %}
 
 #
-# This recipe builds two variants of the git-annex conda package: the standard one, and a "nodep" (no-dependencies) one.
-# The nodep package installs the standalone version of git-annex ( https://git-annex.branchable.com/install/Linux_standalone/ ),
-# which has no dependencies; it can be used to install git-annex into conda environments that include packages which conflict
-# with some dependencies of git-annex.  The standard (non-nodep) version is preferred; the nodep version should only be used
-# in case of unresolvable dependency conflicts.
+# This recipe builds two variants of the git-annex conda package: the standard one, and a "nodep" (no-dependencies)
+# one.  The nodep package installs the standalone version of git-annex (
+# https://git-annex.branchable.com/install/Linux_standalone/ ), which has no dependencies; it can be used to install
+# git-annex into conda environments that include packages which conflict with some dependencies of git-annex.  The
+# standard (non-nodep) version is preferred; the nodep version should only be used in case of unresolvable dependency
+# conflicts.
 #
 
 {% set version = "8.20210330" %}  # [not nodep]
