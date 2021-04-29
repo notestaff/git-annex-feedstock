@@ -133,7 +133,7 @@ test:
     - git-annex version | grep {{ version }}
     - git-annex test
   downstreams:
-    - annexremote=1.5.0
+    - annexremote
     - datalad=0.14.3
 
 about:
