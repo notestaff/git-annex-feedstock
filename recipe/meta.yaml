@@ -9,9 +9,9 @@
 # conflicts.
 #
 
-{% set version = "8.20210428" %}  # [not nodep]
+{% set version = "8.20210621" %}  # [not nodep]
 {% set version = "8.20210331" %}  # [nodep]
-{% set sha256 = "e871e6d205c9f5eeff74586026f4353a352f9a935ca4a13439080043ed85fb76" %}  # [not nodep]
+{% set sha256 = "16a52c8c69d4f3396c530ce413b8fe851250477e5870f140614031f2fbab2806" %}  # [not nodep]
 {% set sha256 = "18866ab90823695a65952041ca174fe2df2d82d8dd11d972eceef192358953c3" %}  # [nodep]
 {% set size = "50881174" %}  # [nodep]
 
