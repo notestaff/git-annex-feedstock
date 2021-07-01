@@ -9,11 +9,11 @@
 # conflicts.
 #
 
-{% set version = "8.20210621" %}  # [not nodep]
-{% set version = "8.20210331" %}  # [nodep]
-{% set sha256 = "16a52c8c69d4f3396c530ce413b8fe851250477e5870f140614031f2fbab2806" %}  # [not nodep]
-{% set sha256 = "18866ab90823695a65952041ca174fe2df2d82d8dd11d972eceef192358953c3" %}  # [nodep]
-{% set size = "50881174" %}  # [nodep]
+{% set version = "8.20210630" %}  # [not nodep]
+{% set version = "8.20210622" %}  # [nodep]
+{% set sha256 = "c608019cc5de0005fcf29143e0e7efc5944233692ff5afd40148e5e3546bbf57" %}  # [not nodep]
+{% set sha256 = "869f875e280db0cc3243d9d0d33492f1c3bc182053544c1d5eb0ec463125fe76" %}  # [nodep]
+{% set size = "55109776" %}  # [nodep]
 
 {% set nodep = True %}  # [nodep]
 {% set nodep = False %}  # [not nodep]
